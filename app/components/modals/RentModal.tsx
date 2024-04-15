@@ -14,6 +14,8 @@ import Counter from "../inputs/Counter";
 import ImageUpload from "../inputs/ImageUpload";
 import Input from "../inputs/Input";
 import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from 'next/navigation';
 
 enum STEPS {
     CATEGORY = 0,
@@ -25,6 +27,7 @@ enum STEPS {
 }
 
 const RentModal = () => {
+    const router = useRouter();
     const rentModal = useRentModal();
 
     const [step, setStep] = useState(STEPS.CATEGORY);
@@ -43,8 +46,8 @@ const RentModal = () => {
         defaultValues:{
             category: '',
             location: null,
-            capacityLimit: 10,
-            guestCount: 1,
+            // capacityLimit: 10,
+            guestCount: 10,
             imageSrc: '',
             price: '',
             title:'',
@@ -54,7 +57,7 @@ const RentModal = () => {
 
     const category = watch('category');
     const location = watch('location');
-    const capacityLimit = watch('capacityLimit');
+    const guestCount = watch('guestCount');
     const imageSrc = watch('imageSrc');
 
     const Map = useMemo(() => dynamic(() => import('../Map'), {
@@ -84,7 +87,19 @@ const RentModal = () => {
 
         setIsLoading(true)
 
-        axios.post
+        axios.post('/api/listings', data)
+        .then(() => {
+            toast.success('Listing created!');
+            router.refresh();
+            reset();
+            setStep(STEPS.CATEGORY);
+            rentModal.onClose();
+        })
+        .catch(() => {
+            toast.error('Something went wronng.');
+        }).finally(() => {
+            setIsLoading(false);
+        })
     }
 
     const actionLabel = useMemo(() => {
@@ -157,8 +172,8 @@ const RentModal = () => {
                 <Counter
                     title="Capacity limit"
                     subtitle="How many guests do you allow"
-                    value={capacityLimit}
-                    onChange={(value) => setCustomValue('capacityLimit', value)}
+                    value={guestCount}
+                    onChange={(value) => setCustomValue('guestCount', value)}
                 />
             </div>
         )
@@ -192,11 +207,12 @@ const RentModal = () => {
                     disabled={isLoading}
                     register={register}
                     errors={errors}
+                    capitalize
                     required
                 />
                 <hr/>
                 <Input
-                    id="title"
+                    id="description"
                     label="Description"
                     disabled={isLoading}
                     register={register}
@@ -232,7 +248,7 @@ const RentModal = () => {
         <Modal
         isOpen={rentModal.isOpen}
         onClose={rentModal.onClose}
-        onSubmit={onNext}
+        onSubmit={handleSubmit(onSubmit)}
         actionLabel={actionLabel}
         secondaryActionLabel={secondaryActionLabel}
         secondaryAction={step == STEPS.CATEGORY ? undefined : onBack}

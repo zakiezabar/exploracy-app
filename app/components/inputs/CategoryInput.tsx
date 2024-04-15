@@ -9,6 +9,8 @@ interface CategoryInputProps {
   label: string;
   selected?: boolean;
   onClick: (value: string) => void;
+  isRequired?: boolean; // New prop to indicate if the selection is required
+  error?: boolean; // New prop to indicate error state (e.g., submission attempted without selection)
 }
 
 const CategoryInput: React.FC<CategoryInputProps> = ({
@@ -16,6 +18,8 @@ const CategoryInput: React.FC<CategoryInputProps> = ({
   label,
   selected,
   onClick,
+  isRequired = false,
+  error = false,
 }) => {
 
   const isIconComponent = typeof Icon === 'function';
@@ -36,13 +40,14 @@ const CategoryInput: React.FC<CategoryInputProps> = ({
         cursor-pointer
         ${selected ? 'border-black' : 'border-neutral-200'}
         ${selected ? 'bg-slate-100' : 'none'}
+        ${error && isRequired && !selected ? 'border-red-500' : ''}
         `}
     >
       { isIconComponent ?
         React.createElement(Icon, { size: 24 }) :
         <Image src={Icon} alt={label} width={44} height={44} />
-        }
-      <div className="font-semibold">{label}</div>
+      }
+      <div className="font-semibold ${error && isRequired && !selected ? 'text-red-500' : ''}">{label}</div>
     </div>
   );
 };

@@ -38,7 +38,7 @@ const Button: React.FC<ButtonProps> = ({
     ${small ? 'py-1' : 'py-3'}
     ${small ? 'text-sm' : 'text-md'}
     ${small ? 'font-semibold' : 'font-bold'}
-    ${small ? 'border-[1px]' : 'border-[1px]'}
+    ${small ? 'border-[1px]' : 'border-[2px]'}
     `}
     >
       {Icon && (

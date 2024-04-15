@@ -12,6 +12,7 @@ interface InputProps {
   required?: boolean;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
+  capitalize?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -23,6 +24,7 @@ const Input: React.FC<InputProps> = ({
   required,
   register,
   errors,
+  capitalize,
 }) => {
   return (
     <div className="w-full relative">
@@ -69,6 +71,7 @@ const Input: React.FC<InputProps> = ({
         ${formatPrice ? 'pl-12' : 'pl-4'}
         ${errors[id] ? 'border-rose-500' : 'border-neutral-300'}
         ${errors[id] ? 'focus:border-rose-500' : 'focus:border-black'}
+        ${capitalize ? 'capitalize' : 'normal-case'}
       `}
       />
       <label
