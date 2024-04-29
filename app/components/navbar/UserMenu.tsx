@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { AiOutlineMenu } from 'react-icons/ai';
 import Avatar from '../Avatar';
 import { useCallback, useState } from 'react';
@@ -18,6 +19,7 @@ interface UserMenuProps {
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
+  const router = useRouter();
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const rentModal = useRentModal();
@@ -69,6 +71,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                 px-4
                 rounded-full
                 hover:bg-neutral-100
+                hover:shadow-md
                 transition
                 cursor-pointer
                 "
@@ -81,7 +84,6 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                 p-4
                 md:py-1
                 md:px-2
-                border-[1px]
                 border-neutral-200
                 flex
                 flex-row
@@ -89,6 +91,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                 gap-3
                 rounded-full
                 cursor-pointer
+                hover:bg-neutral-100
                 hover:shadow-md
                 transition
                 "
@@ -118,13 +121,31 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           <div className="flex flex-col cursor-pointer">
             {currentUser ? (
               <>
-                <MenuItem onClick={() => {}} label="My bookings" />
-                <MenuItem onClick={() => {}} label="My favourites" />
-                <MenuItem onClick={() => {}} label="My reservations" />
-                <MenuItem onClick={() => {}} label="My activities" />
-                <MenuItem onClick={rentModal.onOpen} label="Create new activity" />
+                <MenuItem 
+                  onClick={() => router.push("/trips")} 
+                  label="My bookings" 
+                />
+                <MenuItem 
+                  onClick={() => router.push("/favorites")} 
+                  label="My favorites"
+                />
+                <MenuItem 
+                  onClick={() => router.push("/reservations")} 
+                  label="My reservations"
+                />
+                <MenuItem 
+                  onClick={() => router.push("/properties")} 
+                  label="My listing activities"
+                />
+                <MenuItem 
+                  onClick={rentModal.onOpen} 
+                  label="Create new activity"
+                />
                 <hr />
-                <MenuItem onClick={() => signOut()} label="Logout" />
+                <MenuItem 
+                  onClick={() => signOut()} 
+                  label="Logout"
+                />
               </>
             ) : (
               <>

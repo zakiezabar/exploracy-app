@@ -28,12 +28,15 @@ const Button: React.FC<ButtonProps> = ({
     disabled:opacity-70
     disabled:cursor-not-allowed
     rounded-lg
+    border-2
+    border-b-4
+    border-primary-500
     hover:opacity-80
     transition
     w-full
     p-2
     ${outline ? 'bg-white' : 'bg-primary-400'}
-    ${outline ? 'border-gray-200' : 'border-primary-500'}
+    ${outline ? 'border-slate-200' : 'border-primary-500'}
     ${outline ? 'text-black' : 'text-black'}
     ${small ? 'py-1' : 'py-3'}
     ${small ? 'text-sm' : 'text-md'}

@@ -11,15 +11,15 @@ interface EmptyStateProps {
 }
 
 const EmptyState: React.FC<EmptyStateProps> = ({
-    title = "No exact matches",
-    subtitle = "Try changing your filters",
+    title = "No activities available under this category",
+    subtitle = "Try change to a different category",
     showReset
 }) => {
     const router = useRouter();
 
     return (
     <div className="
-        h-[60vh]
+        h-[40vh]
         flex
         flex-col
         gap-2
@@ -35,7 +35,7 @@ const EmptyState: React.FC<EmptyStateProps> = ({
             {showReset && (
                 <Button
                     outline
-                    label="Remove all filters"
+                    label="Show all"
                     onClick={() => router.push('/')}/>
             )}
 

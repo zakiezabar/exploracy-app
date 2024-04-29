@@ -1,27 +1,37 @@
 import getCurrentUser from "./actions/getCurrentUser";
-import getListings from "./actions/getListings";
+import getListings, { IListingsParams } from "./actions/getListings";
 
 import ClientOnly from "./components/ClientOnly";
 import Container from "./components/Container";
 import EmptyState from "./components/EmptyState";
+import Hero from "./components/Hero";
 import ListingCard from "./components/listings/ListingCard";
+import Categories from "./components/navbar/Categories";
 
-export default async function Home() {
-  const listings = await getListings();
+interface HomeProps {
+  searchParams: IListingsParams
+}
+
+const Home = async ({ searchParams }: HomeProps) => {
+  const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
 
   if (listings.length === 0) {
     return (
       <ClientOnly>
+        <Hero />
+        <Categories />
         <EmptyState showReset/>
       </ClientOnly>
     )
   }
   return (
     <ClientOnly>
+      <Hero />
+      <Categories />
       <Container>
         <div className="
-          pt-24
+          pt-8
           grid
           grid-cols-1
           sm:grid-cols-2
@@ -45,3 +55,5 @@ export default async function Home() {
     </ClientOnly>
   );
 }
+
+export default Home;
