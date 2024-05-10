@@ -22,11 +22,11 @@ import { useRouter } from 'next/navigation';
 
 enum STEPS {
     CATEGORY = 0,
-    LOCATION = 1,
-    INFO = 2,
-    IMAGES = 3,
-    DESCRIPTION = 4,
-    PRICE = 5
+    DESCRIPTION = 1,
+    IMAGES = 2,
+    INFO = 3,
+    // DESCRIPTION = 4,
+    // PRICE = 5
 }
 
 const RentModal = () => {
@@ -55,6 +55,7 @@ const RentModal = () => {
             price: '',
             title:'',
             description: '',
+            highlight: '',
         }
     });
 
@@ -84,7 +85,7 @@ const RentModal = () => {
     }
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        if (step !== STEPS.PRICE) {
+        if (step !== STEPS.INFO) {
             return onNext();
         }
 
@@ -106,7 +107,7 @@ const RentModal = () => {
     }
 
     const actionLabel = useMemo(() => {
-        if (step == STEPS.PRICE) {
+        if (step == STEPS.INFO) {
             return 'Create';
         }
 
@@ -148,9 +149,39 @@ const RentModal = () => {
         </div>
     )
 
-    if (step === STEPS.LOCATION) {
+    if (step === STEPS.DESCRIPTION) {
         bodyContent = (
             <div className="flex flex-col gap-8">
+                <Heading
+                    title="How would you describe this activity?"
+                    subtitle="Something that is very sweet and nice"
+                />
+                <Input 
+                    id="title"
+                    label="Activity name"
+                    disabled={isLoading}
+                    register={register}
+                    errors={errors}
+                    capitalize
+                    required
+                />
+                <Input
+                    id="description"
+                    label="Description"
+                    disabled={isLoading}
+                    register={register}
+                    errors={errors}
+                    required
+                />
+                <Input 
+                    id="hightlight"
+                    label="What you'll do?"
+                    disabled={isLoading}
+                    register={register}
+                    errors={errors}
+                    capitalize
+                    required
+                />
                 <Heading
                 title="Where is your activity located?"
                 subtitle="Help guests find you!"
@@ -161,23 +192,6 @@ const RentModal = () => {
                 {/* <Map
                 center={location?.latlng}
                 /> */}
-            </div>
-        )
-    }
-
-    if (step === STEPS.INFO) {
-        bodyContent = (
-            <div className="flex flex-col gap-8">
-                <Heading
-                title="Share some basic information about your activity"
-                subtitle="What are you offering?"
-                />
-                <Counter
-                    title="Capacity limit"
-                    subtitle="How many guests do you allow"
-                    value={guestCount}
-                    onChange={(value) => setCustomValue('guestCount', value)}
-                />
             </div>
         )
     }
@@ -197,38 +211,19 @@ const RentModal = () => {
         )
     }
 
-    if (step === STEPS.DESCRIPTION) {
+    if (step === STEPS.INFO) {
         bodyContent = (
             <div className="flex flex-col gap-8">
                 <Heading
-                    title="How would you describe this activity?"
-                    subtitle="Something that is very sweet and nice"
+                title="Share some basic information about your activity"
+                subtitle="What are you offering?"
                 />
-                <Input 
-                    id="title"
-                    label="Activity name"
-                    disabled={isLoading}
-                    register={register}
-                    errors={errors}
-                    capitalize
-                    required
+                <Counter
+                    title="Capacity limit"
+                    subtitle="How many guests do you allow"
+                    value={guestCount}
+                    onChange={(value) => setCustomValue('guestCount', value)}
                 />
-                <hr/>
-                <Input
-                    id="description"
-                    label="Description"
-                    disabled={isLoading}
-                    register={register}
-                    errors={errors}
-                    required
-                />
-            </div>
-        )
-    }
-
-    if (step === STEPS.PRICE) {
-        bodyContent = (
-            <div className="flex flex-col gap-8">
                 <Heading
                     title="What would be the price for this activity?"
                     subtitle="How much do you charge per pax?"
@@ -244,8 +239,48 @@ const RentModal = () => {
                     required
                 />
             </div>
+            
+            
         )
     }
+
+    // if (step === STEPS.LOCATION) {
+    //     bodyContent = (
+    //         <div className="flex flex-col gap-8">
+    //             <Heading
+    //             title="Where is your activity located?"
+    //             subtitle="Help guests find you!"
+    //             />
+    //             <StateSelect 
+    //             value={location}
+    //             onChange={(value) => setCustomValue('location', value)}/>
+    //             <Map
+    //             center={location?.latlng}
+    //             />
+    //         </div>
+    //     )
+    // }
+
+    // if (step === STEPS.PRICE) {
+    //     bodyContent = (
+    //         <div className="flex flex-col gap-8">
+    //             <Heading
+    //                 title="What would be the price for this activity?"
+    //                 subtitle="How much do you charge per pax?"
+    //             />
+    //             <Input
+    //                 id="price"
+    //                 label="Price"
+    //                 formatPrice
+    //                 type="number"
+    //                 disabled={isLoading}
+    //                 register={register}
+    //                 errors={errors}
+    //                 required
+    //             />
+    //         </div>
+    //     )
+    // }
 
     return (
         <Modal

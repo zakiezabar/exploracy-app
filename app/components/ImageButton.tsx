@@ -16,7 +16,7 @@ const ImageButton: React.FC<ImageButtonProps> = ({ imageSrc, title, onClick, dis
       onClick={onClick}
       disabled={disabled}
       className={`flex flex-col items-center justify-center p-4 rounded-lg transition-colors ${
-        disabled ? 'opacity-50 cursor-not-allowed' : 'opacity-100 bg-primary-200 hover:bg-primary-300 cursor-pointer'
+        disabled ? 'opacity-50 cursor-not-allowed' : 'opacity-100 border-2 hover:bg-slate-100 cursor-pointer'
       }`}
     >
       <div className="relative w-16 h-16 mb-2">

@@ -51,12 +51,15 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({ icon: Icon, label, selected }
     items-center
     gap-2
     p-3
-    border-b-2
-    hover:text-primary-500
+    border-b-4
+    hover:text-black
     transition
     cursor-pointer
-    ${selected ? 'border-b-neutral-800' : 'border-transparent'}
-    ${selected ? 'text-neutral-800' : 'text-neutral-500'}
+    w-full
+    rounded-xl
+    ${selected ? 'border-b-slate-200' : 'border-transparent'}
+    ${selected ? 'text-black' : 'text-neutral-400'}
+    ${selected ? 'bg-slate-100' : 'bg-transparent'}
     `}
     >
         { isIconComponent ?
