@@ -1,6 +1,6 @@
 'use client'
 
-import useRentModal from "@/app/hooks/useRentModal";
+import usePrivateRentModal from "@/app/hooks/usePrivateRentModal";
 
 import Modal from "./Modal";
 import { useMemo, useState } from "react";
@@ -29,9 +29,9 @@ enum STEPS {
     PRICE = 5
 }
 
-const RentModal = () => {
+const PrivateRentModal = () => {
     const router = useRouter();
-    const rentModal = useRentModal();
+    const privateRentModal = usePrivateRentModal();
 
     const [step, setStep] = useState(STEPS.CATEGORY);
     const [isLoading, setIsLoading] = useState(false);
@@ -96,7 +96,7 @@ const RentModal = () => {
             router.refresh();
             reset();
             setStep(STEPS.CATEGORY);
-            rentModal.onClose();
+            privateRentModal.onClose();
         })
         .catch(() => {
             toast.error('Something went wronng.');
@@ -123,7 +123,7 @@ const RentModal = () => {
     let bodyContent = (
         <div className="flex flex-col gap-8">
             <Heading
-            title="Which of these best describes your activity?"
+            title="Which of these best describes your private activity?"
             subtitle="Select a category"/>
             <div className="
             grid
@@ -249,16 +249,16 @@ const RentModal = () => {
 
     return (
         <Modal
-        isOpen={rentModal.isOpen}
-        onClose={rentModal.onClose}
+        isOpen={privateRentModal.isOpen}
+        onClose={privateRentModal.onClose}
         onSubmit={handleSubmit(onSubmit)}
         actionLabel={actionLabel}
         secondaryActionLabel={secondaryActionLabel}
         secondaryAction={step == STEPS.CATEGORY ? undefined : onBack}
-        title="Create new activity"
+        title="Create new PRIVATE activity"
         body={bodyContent}
         />
     );
 }
  
-export default RentModal;
+export default PrivateRentModal;

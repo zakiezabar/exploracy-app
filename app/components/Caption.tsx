@@ -12,7 +12,7 @@ const Caption: React.FC<CaptionProps> = ({
 }) => {
     return ( 
         <div className={center ? 'text-center' : 'text-start'}>
-            <div className="text-sm font-semibold text-slate-400">
+            <div className="text-4xl font-normal text-slate-300/50">
                 {title}
             </div>
             <div className="font-light text-neutral-500 mt-2">

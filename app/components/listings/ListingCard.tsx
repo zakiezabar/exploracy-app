@@ -1,6 +1,7 @@
 'use client'
 
 import useCountries from "@/app/hooks/useCountries";
+import useMalaysianStates from "@/app/hooks/useMalaysianStates";
 import { SafeUser, SafeListing, SafeReservation } from "@/app/types";
 
 import { useRouter } from "next/navigation";
@@ -30,11 +31,12 @@ const ListingCard: React.FC<ListingCardProps> = ({
     currentUser
 }) => {
     const router = useRouter();
-    const { getByValue } = useCountries();
+    const { getByValue } = useMalaysianStates();
 
-    const title = data.title.length > 26 ? data.title.substring(0, 26) + '...' : data.title;
+    const title = data.title.length > 26 ? data.title.substring(0, 25) + '...' : data.title;
     
     const location = getByValue(data.locationValue);
+    console.log("Location data:", location);
 
     const handleCancel = useCallback(
         (e: React.MouseEvent<HTMLElement>) => {
@@ -102,7 +104,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
                     </div>
                 </div>
                 <div className="font-semibold text-base capitalize">
-                    {title} <span className="font-light text-base">{location?.label}</span>
+                    {title}<br></br> <span className="font-light text-base">{location?.label}</span>
                 </div>
                 <div className="font-light text-neutral-500">
                     {reservationDate || data.category}
