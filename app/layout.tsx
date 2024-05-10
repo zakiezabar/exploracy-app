@@ -6,10 +6,12 @@ import ClientOnly from './components/ClientOnly';
 import RegisterModal from './components/modals/RegisterModal';
 import LoginModal from './components/modals/LoginModal';
 import RentModal from './components/modals/RentModal';
+import PrivateRentModal from './components/modals/PrivateRentModal';
 import SearchModal from './components/modals/SearchModal';
 
 import ToasterProvider from './providers/ToasterProvider';
 import getCurrentUser from './actions/getCurrentUser';
+import EmptyModal from './components/modals/EmptyModal';
 
 export const metadata: Metadata = {
   title: 'Exploracy',
@@ -33,6 +35,8 @@ export default async function RootLayout({
           <ToasterProvider />
           <SearchModal />
           <RentModal />
+          <PrivateRentModal />
+          <EmptyModal />
           <LoginModal />
           <RegisterModal />
           <Navbar currentUser={currentUser} />

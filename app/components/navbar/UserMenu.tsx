@@ -9,6 +9,7 @@ import useRegisterModal from '@/app/hooks/useRegisterModal';
 import useLoginModal from '@/app/hooks/useLoginModal';
 import useRentModal from '@/app/hooks/useRentModal';
 import usePrivateRentModal from '@/app/hooks/usePrivateRentModal';
+import useEmptyModal from '@/app/hooks/useEmptyModal';
 import ActivityTypeModal from '../modals/ActivityTypeModal';
 
 import { signIn, signOut } from 'next-auth/react';
@@ -24,6 +25,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const router = useRouter();
   const { onOpen: onRentModalOpen } = useRentModal();
   const { onOpen: onPrivateModalOpen } = usePrivateRentModal();
+  const { onOpen: onEmptyModalOpen } = useEmptyModal();
+
   // const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const rentModal = useRentModal();
@@ -79,7 +82,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                 <MenuItem onClick={() => router.push("/favorites")} label="My favorites" />
                 <MenuItem onClick={() => router.push("/reservations")} label="My reservations" />
                 <MenuItem onClick={() => router.push("/properties")} label="My listing activities" />
-                <MenuItem onClick={onPrivateModalOpen} label="Create new activity" />
+                <MenuItem onClick={activityType} label="Create new activity" />
                 <hr />
                 <MenuItem onClick={() => signOut()} label="Logout" />
               </div>
