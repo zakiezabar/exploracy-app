@@ -27,7 +27,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const { onOpen: onPrivateModalOpen } = usePrivateRentModal();
   const { onOpen: onEmptyModalOpen } = useEmptyModal();
 
-  // const registerModal = useRegisterModal();
+  const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const rentModal = useRentModal();
 
@@ -39,12 +39,12 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     SetIsOpen((value) => !value);
   }, []);
 
-  // const onRent = useCallback(() => {
-  //   if (!currentUser) {
-  //     return loginModal.onOpen();
-  //   }
-  //   rentModal.onOpen();
-  // }, [currentUser, loginModal, rentModal]);
+  const onRent = useCallback(() => {
+    if (!currentUser) {
+      return loginModal.onOpen();
+    }
+    rentModal.onOpen();
+  }, [currentUser, loginModal, rentModal]);
 
   const activityType = useCallback(() => {
     if (!currentUser) {

@@ -22,9 +22,11 @@ import { useRouter } from 'next/navigation';
 
 enum STEPS {
     CATEGORY = 0,
-    DESCRIPTION = 1,
-    IMAGES = 2,
-    INFO = 3,
+    LOCATION = 1,
+    TITLE = 2,
+    DESCRIPTION = 3,
+    IMAGES = 4,
+    INFO = 5,
     // DESCRIPTION = 4,
     // PRICE = 5
 }
@@ -52,10 +54,13 @@ const RentModal = () => {
             // capacityLimit: 10,
             guestCount: 10,
             imageSrc: '',
-            price: '',
+            price: '0',
             title:'',
             description: '',
             highlight: '',
+            whatsIncluded: '',
+            requirement: '',
+            difficulty: 'Normal',
         }
     });
 
@@ -100,7 +105,7 @@ const RentModal = () => {
             rentModal.onClose();
         })
         .catch(() => {
-            toast.error('Something went wronng.');
+            toast.error('Something went wrong.');
         }).finally(() => {
             setIsLoading(false);
         })
@@ -149,12 +154,37 @@ const RentModal = () => {
         </div>
     )
 
-    if (step === STEPS.DESCRIPTION) {
+    if (step === STEPS.LOCATION) {
+        bodyContent = (
+            <div className="flex flex-col gap-8">
+                <Heading
+                title="Where is your activity located?"
+                subtitle="Help guests find you!"
+                />
+                <StateSelect 
+                value={location}
+                onChange={(value) => setCustomValue('location', value)}/>
+                {/* <Map
+                center={location?.latlng}
+                /> */}
+                <Input 
+                    id="locationDetails"
+                    label="Enter the landmark to your location or any instructions to help guests reach your activity place."
+                    disabled={isLoading}
+                    register={register}
+                    errors={errors}
+                    required
+                />
+            </div>
+        )
+    }
+
+    if (step === STEPS.TITLE) {
         bodyContent = (
             <div className="flex flex-col gap-8">
                 <Heading
                     title="How would you describe this activity?"
-                    subtitle="Something that is very sweet and nice"
+                    subtitle="Describe what makes this activity unique and help quests to understand what they can expect. Whether it's thrilling, relaxing or educational."
                 />
                 <Input 
                     id="title"
@@ -167,31 +197,50 @@ const RentModal = () => {
                 />
                 <Input
                     id="description"
-                    label="Description"
+                    label="Description of your activity"
                     disabled={isLoading}
                     register={register}
                     errors={errors}
                     required
                 />
+            </div>
+        )
+    }
+
+    if (step === STEPS.DESCRIPTION) {
+        bodyContent = (
+            <div className="flex flex-col gap-8">
+                <Heading
+                    title="Activity highlights"
+                    subtitle="Provide a brief description of the key activities and experiences guests will engage in. Highlight any unique aspects or attractions."
+                />
                 <Input 
-                    id="hightlight"
-                    label="What you'll do?"
+                    id="highlight"
+                    label="What exactly guests will do?"
                     disabled={isLoading}
                     register={register}
                     errors={errors}
                     capitalize
                     required
                 />
-                <Heading
-                title="Where is your activity located?"
-                subtitle="Help guests find you!"
+                <Input 
+                    id="whatsIncluded"
+                    label="What's included in this activity?. Make sure to note any special perks or features."
+                    disabled={isLoading}
+                    register={register}
+                    errors={errors}
+                    capitalize
+                    required
                 />
-                <StateSelect 
-                value={location}
-                onChange={(value) => setCustomValue('location', value)}/>
-                {/* <Map
-                center={location?.latlng}
-                /> */}
+                <Input 
+                    id="requirement"
+                    label="List essential items guests need to bring to participate in this activity."
+                    disabled={isLoading}
+                    register={register}
+                    errors={errors}
+                    capitalize
+                    required
+                />
             </div>
         )
     }
@@ -215,16 +264,6 @@ const RentModal = () => {
         bodyContent = (
             <div className="flex flex-col gap-8">
                 <Heading
-                title="Share some basic information about your activity"
-                subtitle="What are you offering?"
-                />
-                <Counter
-                    title="Capacity limit"
-                    subtitle="How many guests do you allow"
-                    value={guestCount}
-                    onChange={(value) => setCustomValue('guestCount', value)}
-                />
-                <Heading
                     title="What would be the price for this activity?"
                     subtitle="How much do you charge per pax?"
                 />
@@ -237,6 +276,12 @@ const RentModal = () => {
                     register={register}
                     errors={errors}
                     required
+                />
+                <Counter
+                    title="Capacity limit"
+                    subtitle="How many guests do you allow"
+                    value={guestCount}
+                    onChange={(value) => setCustomValue('guestCount', value)}
                 />
             </div>
             
@@ -292,6 +337,7 @@ const RentModal = () => {
         secondaryAction={step == STEPS.CATEGORY ? undefined : onBack}
         title="Create new activity"
         body={bodyContent}
+        fullscreen
         />
     );
 }

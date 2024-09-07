@@ -40,34 +40,36 @@ const PropertiesClient: React.FC<PropertiesClientProps> = ({
 
   return ( 
     <Container>
-      <Heading 
-        title="My activities"
-        subtitle="List of your activities"
-      />
-      <div
-        className="
-          mt-10
-          grid
-          grid-cols-1
-          sm:grid-cols-2
-          md:grid-cols-3
-          lg:grid-cols-4
-          xl:grid-cols-5
-          2xl:grid-cols-6
-          gap-8
-        "
-      >
-        {listings.map((listing) => (
-          <ListingCard
-            key={listing.id}
-            data={listing}
-            actionId={listing.id}
-            onAction={onCancel}
-            disabled={deletingId === listing.id}
-            actionLabel="Delete activity"
-            currentUser={currentUser}
-          />
-        ))}
+      <div className="pt-4">
+        <Heading 
+          title="My activities"
+          subtitle="List of your activities"
+        />
+        <div
+          className="
+            mt-10
+            grid
+            grid-cols-1
+            sm:grid-cols-2
+            md:grid-cols-3
+            lg:grid-cols-4
+            xl:grid-cols-5
+            2xl:grid-cols-6
+            gap-8
+          "
+        >
+          {listings.map((listing) => (
+            <ListingCard
+              key={listing.id}
+              data={listing}
+              actionId={listing.id}
+              onAction={onCancel}
+              disabled={deletingId === listing.id}
+              actionLabel="Delete activity"
+              currentUser={currentUser}
+            />
+          ))}
+        </div>
       </div>
     </Container>
    );

@@ -8,12 +8,17 @@ import ListingCategory from './ListingCategory';
 import { categories } from '../navbar/Categories';
 import CategoryInput from '../inputs/CategoryInput';
 import dynamic from 'next/dynamic';
+import Heading from '../Heading';
 
 const Map = dynamic(() => import('../Map'))
 
 interface ListingInfoProps {
   user: SafeUser;
   description: string;
+  highlight: string;
+  whatsIncluded: string;
+  requirement: string;
+  difficulty: string;
   guestCount: number;
   category: {
         icon: React.ComponentType<{ size: number }>;
@@ -21,49 +26,62 @@ interface ListingInfoProps {
         description: string;
       } | undefined;
   locationValue: string;
+  locationDetails: string;
 }
 
 const ListingInfo: React.FC<ListingInfoProps> = ({
   user,
   description,
+  highlight,
+  whatsIncluded,
+  requirement,
+  difficulty,
   guestCount,
   category,
   locationValue,
+  locationDetails,
 }) => {
   const { getByValue } = useCountries();
 
   const coordinates = getByValue(locationValue)?.latlng;
 
   return (
-    <div className="col-span-4 flex flex-col gap-8">
-      <div className="flex flex-col gao-2">
-        <div
-          className="
-          text-base
-          font-semibold
+    <div className="col-span-4 flex flex-col gap-8 ">
+      <div className="flex flex-row gap-2 justify-between items-center">
+        <div className="flex flex-col">
+          <div
+            className="
+            text-base
+            font-semibold
+            flex
+            flex-row
+            items-center
+            gap-2
+          "
+          >
+            <div>Hosted by {user?.name}</div>
+            <Avatar src={user?.image} />
+          </div>
+          <div
+            className="
           flex
           flex-row
           items-center
-          gap-2
-        "
-        >
-          <div className="flex flex-col gap-2">
-            <Avatar src={user?.image} />
-            <div>Hosted by {user?.name}</div>
+          gap-4
+          font-light
+          text-neutral-500"
+          >
+            <div className="text-sm">Total pax: {guestCount}</div>
           </div>
         </div>
-        <div
-          className="
-        flex
-        flex-row
-        items-center
-        gap-4
-        font-light
-        text-neutral-500"
-        >
-          <div>Total pax: {guestCount}</div>
+        <div className="flex flex-col text-right">
+          <div className="text-sm">Difficulty level:</div>
+          <div className="text-base font-light text-neutral-500">
+            {difficulty}
+          </div>
         </div>
       </div>
+      
       <hr />
 
       {category && (
@@ -78,7 +96,42 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
         {description}
       </div>
       <hr />
-      <Map center={coordinates} />
+      <div className="flex flex-col">
+        <Heading
+          title="What you will do?"
+        />
+        <div className="text-base font-light text-neutral-500">
+          {highlight}
+        </div>
+      </div>
+      <hr />
+      <div className="flex flex-col">
+        <Heading
+          title="What is included in this activity?"
+        />
+        <div className="text-base font-light text-neutral-500">
+          {whatsIncluded}
+        </div>
+      </div>
+      <hr />
+      <div className="flex flex-col">
+        <Heading
+          title="Guests requirements"
+        />
+        <div className="text-base font-light text-neutral-500">
+          {requirement}
+        </div>
+      </div>
+      <hr />
+      <div className="flex flex-col">
+        <Heading
+          title="Location"
+        />
+        {/* <Map center={coordinates} /> */}
+        <div className="text-base font-light text-neutral-500">
+          {locationDetails}
+        </div>
+      </div>
     </div>
   );
 };

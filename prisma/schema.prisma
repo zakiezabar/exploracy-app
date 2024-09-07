@@ -6,12 +6,20 @@
 
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native", "darwin", "darwin-arm64"]
 }
 
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+enum Role {
+  USER
+  ADMIN
+}
+
+
 
 model User {
   id              String    @id @default(auto()) @map("_id") @db.ObjectId
@@ -28,6 +36,7 @@ model User {
   hasNotification Boolean?
   points          Int?
 
+  role      Role     @default(USER)
   accounts     Account[]
   listings     Listing[]
   reservations Reservation[]
@@ -59,21 +68,23 @@ model Account {
 }
 
 model Listing {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  title         String
-  description   String
-  imageSrc      String
-  createdAt     DateTime @default(now())
-  category      String
-  guestCount    Int
-  locationValue String
-  highlight     String?
-  requirement   String?
-  difficulty    String?
-  userId        String   @db.ObjectId
-  price         Int
-  public        Boolean  @default(true)
-  capacityLimit Int?
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  title           String
+  description     String
+  imageSrc        String
+  createdAt       DateTime @default(now())
+  category        String
+  guestCount      Int
+  locationValue   String
+  locationDetails String?
+  highlight       String?
+  whatsIncluded   String?
+  requirement     String?
+  difficulty      String?
+  userId          String   @db.ObjectId
+  price           Int
+  public          Boolean  @default(true)
+  capacityLimit   Int?
 
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   reservations Reservation[]
@@ -89,6 +100,7 @@ model Reservation {
   endDate    DateTime
   totalPrice Int
   createdAt  DateTime @default(now())
+  
 
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)

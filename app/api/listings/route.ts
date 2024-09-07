@@ -16,11 +16,15 @@ export async function POST(
     const {
         title,
         description,
-        highlight,
         imageSrc,
         category,
         guestCount,
         location,
+        locationDetails,
+        highlight,
+        whatsIncluded,
+        requirement,
+        difficulty,
         price,
     } = body;
 
@@ -34,11 +38,15 @@ export async function POST(
         data: {
             title,
             description,
-            highlight,
             imageSrc,
             category,
             guestCount,
             locationValue: location.value,
+            locationDetails,
+            highlight,
+            whatsIncluded,
+            requirement,
+            difficulty,
             price: parseInt(price, 10),
             userId: currentUser.id
         }

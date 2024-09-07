@@ -5,6 +5,7 @@ import { SafeUser } from "@/app/types";
 import Heading from "../Heading";
 import Image from "next/image";
 import HeartButton from "../HeartButton";
+import useMalaysianStates from "@/app/hooks/useMalaysianStates";
 
 interface ListingHeadProps {
   title: string;
@@ -21,14 +22,15 @@ const ListingHead: React.FC<ListingHeadProps> = ({
   id,
   currentUser
 }) => {
-  const { getByValue } = useCountries();
+  const { getByValue } = useMalaysianStates();
   const location = getByValue(locationValue);
+  console.log("Location Data:", location);
 
   return (
-    <>
+    <div className="flex flex-col gap-4 pt-4 ">
       <Heading
         title={title}
-        subtitle={`${location?.region}, ${location?.label}`}
+        subtitle={`${location?.label}`}
       />
       <div
       className="
@@ -51,7 +53,7 @@ const ListingHead: React.FC<ListingHeadProps> = ({
           />
         </div>
       </div>
-    </>
+    </div>
   );
 }
  
