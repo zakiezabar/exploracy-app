@@ -7,22 +7,30 @@ interface IParams {
 export default async function getListingById(
     params: IParams
 ) {
-    try {
-        const { listingId } = params;
+    const { listingId } = params;
 
+    // Return null early if listingId is not provided
+    if (!listingId) {
+        return null;
+    }
+
+    try {
+        // const { listingId } = params;
         const listing = await prisma.listing.findUnique({
             where: {
-                id: listingId
+                id: listingId,
             },
             include: {
-                user: true
-            }
+                user: true, // Include related user data
+            },
         });
 
+        // If no listing is found, return null
         if (!listing) {
             return null;
         }
 
+        // Convert date fields to ISO strings for consistency on client-side
         return {
             ...listing,
             createdAt: listing.createdAt.toISOString(),
