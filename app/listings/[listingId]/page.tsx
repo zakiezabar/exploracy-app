@@ -1,7 +1,7 @@
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import getListingById from "@/app/actions/getListingById";
 import ClientOnly from "@/app/components/ClientOnly";
-import EmptyState from "@/app/components/EmptyState";
+// import EmptyState from "@/app/components/EmptyState";
 import ListingClient from "./ListingClient";
 import getReservations from "@/app/actions/getReservations";
 import { notFound } from "next/navigation"; // Import `notFound` from Next.js
@@ -21,7 +21,7 @@ const ListingPage = async ({ params }: { params: IParams }) => {
     }
 
     const listing = await getListingById({ listingId });
-    const reservations = await getReservations(params);
+    const reservations = await getReservations({ listingId });
     const currentUser = await getCurrentUser();
 
     // If the listing is not found, return a 404 page
