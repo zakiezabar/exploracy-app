@@ -21,7 +21,7 @@ interface ListingInfoProps {
   difficulty: string;
   guestCount: number;
   category: {
-        icon: React.ComponentType<{ size: number }>;
+        icon: React.ComponentType<{ size: number }> | string;
         label: string;
         description: string;
       } | undefined;
@@ -43,6 +43,7 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
 }) => {
   const { getByValue } = useCountries();
 
+  // Get coordinates based on location value
   const coordinates = getByValue(locationValue)?.latlng;
 
   return (
@@ -77,7 +78,7 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
         <div className="flex flex-col text-right">
           <div className="text-sm">Difficulty level:</div>
           <div className="text-base font-light text-neutral-500">
-            {difficulty}
+            {difficulty || "Not specified"} {/* Handle possible undefined value */}
           </div>
         </div>
       </div>
@@ -101,7 +102,7 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
           title="What you will do?"
         />
         <div className="text-base font-light text-neutral-500">
-          {highlight}
+          {highlight || "No highlight available."} {/* Provide a default message */}
         </div>
       </div>
       <hr />
@@ -110,7 +111,7 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
           title="What is included in this activity?"
         />
         <div className="text-base font-light text-neutral-500">
-          {whatsIncluded}
+          {whatsIncluded || "No information available."} {/* Provide a default message */}
         </div>
       </div>
       <hr />
@@ -119,7 +120,7 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
           title="Guests requirements"
         />
         <div className="text-base font-light text-neutral-500">
-          {requirement}
+          {requirement || "No requirements specified."} {/* Provide a default message */}
         </div>
       </div>
       <hr />
@@ -129,7 +130,7 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
         />
         {/* <Map center={coordinates} /> */}
         <div className="text-base font-light text-neutral-500">
-          {locationDetails}
+          {locationDetails || "No location details provided."} {/* Provide a default message */}
         </div>
       </div>
     </div>

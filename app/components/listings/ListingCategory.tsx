@@ -19,10 +19,11 @@ const ListingCategory: React.FC<ListingCategoryProps> = ({
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-row items-center gap-4">
-        { isIconComponent ?
-          React.createElement(Icon, { size: 24 }) :
-          <Image src={Icon} alt={label} width={44} height={44} />
-        }
+      {isIconComponent ? (
+          React.createElement(Icon, { size: 24 }) // Render component if `Icon` is a component
+        ) : (
+          <Image src={Icon} alt={label} width={44} height={44} /> // Render image if `Icon` is a URL
+        )}
         <div className="flex flex-col">
           <div className="text-lg font-semibold">
             {label}

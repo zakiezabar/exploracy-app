@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"; // Ensure dynamic rendering
+
 import getCurrentUser from "./actions/getCurrentUser";
 import getListings, { IListingsParams } from "./actions/getListings";
 
@@ -9,10 +11,11 @@ import ListingCard from "./components/listings/ListingCard";
 import Categories from "./components/navbar/Categories";
 
 interface HomeProps {
-  searchParams: IListingsParams
+  searchParams: IListingsParams;
 }
 
 const Home = async ({ searchParams }: HomeProps) => {
+  // Fetch data directly in the server component
   const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
 
@@ -25,6 +28,7 @@ const Home = async ({ searchParams }: HomeProps) => {
       </ClientOnly>
     )
   }
+
   return (
     <ClientOnly>
       <Hero />
@@ -54,6 +58,6 @@ const Home = async ({ searchParams }: HomeProps) => {
       </Container>
     </ClientOnly>
   );
-}
+};
 
 export default Home;

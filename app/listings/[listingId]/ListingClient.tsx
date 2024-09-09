@@ -131,13 +131,14 @@ const ListingClient: React.FC<ListingClientProps> = ({
               user={listing.user}
               category={category}
               description={listing.description}
-              highlight={listing.highlight}
-              whatsIncluded={listing.whatsIncluded}
-              requirement={listing.requirement}
-              difficulty={listing.difficulty}
+              // Handle null values by providing a default empty value or string
+              highlight={listing.highlight || "No highlight available"}
+              whatsIncluded={listing.whatsIncluded || "No information available"}
+              requirement={listing.requirement || "Np requirement available"}
+              difficulty={listing.difficulty || "Not specified"}
               guestCount={listing.guestCount}
               locationValue={listing.locationValue}
-              locationDetails={listing.locationDetails}
+              locationDetails={listing.locationDetails || "No location details provided"}
             />
             <div className="
               order-first
