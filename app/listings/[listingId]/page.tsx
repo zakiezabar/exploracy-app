@@ -4,6 +4,7 @@ import ClientOnly from "@/app/components/ClientOnly";
 import EmptyState from "@/app/components/EmptyState";
 import ListingClient from "./ListingClient";
 import getReservations from "@/app/actions/getReservations";
+import { notFound } from "next/navigation"; // Import `notFound` from Next.js
 
 
 interface IParams {
@@ -11,17 +12,23 @@ interface IParams {
 }
 
 const ListingPage = async ({ params }: { params: IParams }) => {
-    const listing = await getListingById(params);
+    // const listing = await getListingById(params);
+    const { listingId } = params;
+
+     // Check if listingID exists
+     if (!listingId) {
+        notFound(); // Use Next.js built-in `notFound` for 404 handling
+    }
+
+    const listing = await getListingById({ listingId });
     const reservations = await getReservations(params);
     const currentUser = await getCurrentUser();
 
+    // If the listing is not found, return a 404 page
     if (!listing) {
-        return (
-            <ClientOnly>
-                <EmptyState />
-            </ClientOnly>
-        )
+        notFound(); // Use Next.js built-in `notFound` for 404 handling
     }
+
     return ( 
         <ClientOnly>
             <ListingClient
