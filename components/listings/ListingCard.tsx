@@ -33,7 +33,8 @@ const ListingCard: React.FC<ListingCardProps> = ({
     const router = useRouter();
     const { getByValue } = useMalaysianStates();
 
-    const title = data.title.length > 26 ? data.title.substring(0, 25) + '...' : data.title;
+    // const title = data.title.length > 26 ? data.title.substring(0, 25) + '...' : data.title;
+    const title = data.title;
     
     const location = getByValue(data.locationValue);
     console.log("Location data:", location);
@@ -74,49 +75,34 @@ const ListingCard: React.FC<ListingCardProps> = ({
             className="
                 col-span-1 cursor-pointer group
         ">
-            <div className="flex flex-col gap-2 -full">
-                <div className="
-                    aspect-square
-                    w-full
-                    relative
-                    overflow-hidden
-                    rounded-xl
-                ">
+            <div className="flex flex-col gap-2 -full mb-8">
+                <div className=" w-full relative overflow-hidden rounded-xl h-[360px]">
                     <Image
                         fill
                         alt="Listing"
                         src={data.imageSrc}
-                        className="
-                            object-cover
-                            h-full
-                            w-full
-                            group-hover:scale-125
-                            transition
-                            duration-300
-                            ease-in-out
-                        "
+                        className=" object-cover h-full w-full group-hover:scale-125 transition duration-300 ease-in-out"
                     />
-                    <div className="absolute top-3 right-3">
+                    <div className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                         <HeartButton
                             listingId={data.id}
                             currentUser={currentUser}
                         />
                     </div>
                 </div>
-                <div className="font-semibold text-base capitalize">
-                    {title}<br></br> <span className="font-light text-base">{location?.label}</span>
-                </div>
-                <div className="font-light text-neutral-500">
-                    {reservationDate || data.category}
-                </div>
-                <div className="flex flex-row item-center gap-1">
-                    <div className="font-semibold">
+                <div className="flex flex-col gap-1 text-sm text-mono-900 capitalize">
+                    <div className="font-bold line-clamp-2">{title}</div>
+                    <div className="font-normal truncate">{location?.label}</div>
+                    <div className="flex flex-row item-center gap-1 text-mono-900">
+                    <div className="">
                         MYR {price}
                     </div>
                     {!reservation && (
-                        <div className="font-light">/pax</div>
+                        <div className="font-normal">/pax</div>
                     )}
                 </div>
+                </div>
+                
                 {onAction && actionLabel && (
                     <Button
                         disabled={disabled}

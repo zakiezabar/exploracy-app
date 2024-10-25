@@ -49,22 +49,24 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({ icon: Icon, label, selected }
     flex
     flex-col
     items-center
-    gap-2
+    gap-x-8
+    min-w-[160px]
+    h-[112px]
     p-3
     border-b-4
-    hover:text-black
+    hover:text-secondary-400
+    hover:bg-secondary-100
     transition
     cursor-pointer
-    w-full
     rounded-xl
     ${selected ? 'border-b-slate-200' : 'border-transparent'}
-    ${selected ? 'text-black' : 'text-neutral-400'}
-    ${selected ? 'bg-slate-100' : 'bg-transparent'}
+    ${selected ? 'text-secondary-400' : 'text-mono-900'}
+    ${selected ? 'bg-secondary-100' : 'bg-transparent'}
     `}
     >
         { isIconComponent ?
-        React.createElement(Icon, { size: 24 }) :
-        <Image src={Icon} alt={label} width={24} height={24} />
+        React.createElement(Icon, { size: 64 }) :
+        <Image src={Icon} alt={label} width={64} height={64} />
         }
         <div className="font-medium text-sm">
             {label}

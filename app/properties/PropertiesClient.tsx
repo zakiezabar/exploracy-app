@@ -3,12 +3,12 @@
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 
-import Container from "../components/Container";
-import Heading from "../components/Heading";
+import Container from "../../components/Container";
+import Heading from "../../components/Heading";
 import { SafeUser, SafeListing } from "../types";
 import axios from "axios";
 import toast from "react-hot-toast";
-import ListingCard from "../components/listings/ListingCard";
+import ListingCard from "../../components/listings/ListingCard";
 
 interface PropertiesClientProps {
   listings: SafeListing[];

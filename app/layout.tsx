@@ -1,21 +1,21 @@
 import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
 import './globals.css';
-import Navbar from './components/navbar/Navbar';
-import ClientOnly from './components/ClientOnly';
-import RegisterModal from './components/modals/RegisterModal';
-import LoginModal from './components/modals/LoginModal';
-import RentModal from './components/modals/RentModal';
-import PrivateRentModal from './components/modals/PrivateRentModal';
-import SearchModal from './components/modals/SearchModal';
+import Navbar from '../components/navbar/Navbar';
+import ClientOnly from '../components/ClientOnly';
+import RegisterModal from '../components/modals/RegisterModal';
+import LoginModal from '../components/modals/LoginModal';
+import RentModal from '../components/modals/RentModal';
+import PrivateRentModal from '../components/modals/PrivateRentModal';
+import SearchModal from '../components/modals/SearchModal';
 
 import ToasterProvider from './providers/ToasterProvider';
 import getCurrentUser from './actions/getCurrentUser';
-import EmptyModal from './components/modals/EmptyModal';
+import EmptyModal from '../components/modals/EmptyModal';
 
 export const metadata: Metadata = {
   title: 'Exploracy',
-  description: 'Activities',
+  description: 'Social activities',
 };
 
 const font = Nunito({
@@ -41,9 +41,11 @@ export default async function RootLayout({
           {/* <RegisterModal /> */}
           <Navbar currentUser={currentUser} />
         </ClientOnly>
-        <div className="pb-20 pt-[4.8rem]">
-          {children}
-        </div>
+        <main className="h-full px-4 lg:px-10 lg:pt-24">
+          <div className="mx-auto h-full">
+            {children}
+          </div>
+        </main>
       </body>
     </html>
   );

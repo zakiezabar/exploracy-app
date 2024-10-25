@@ -3,12 +3,12 @@ export const dynamic = "force-dynamic"; // Ensure dynamic rendering
 import getCurrentUser from "./actions/getCurrentUser";
 import getListings, { IListingsParams } from "./actions/getListings";
 
-import ClientOnly from "./components/ClientOnly";
-import Container from "./components/Container";
-import EmptyState from "./components/EmptyState";
-import Hero from "./components/Hero";
-import ListingCard from "./components/listings/ListingCard";
-import Categories from "./components/navbar/Categories";
+import ClientOnly from "../components/ClientOnly";
+import Container from "../components/Container";
+import EmptyState from "../components/EmptyState";
+import ListingCard from "../components/listings/ListingCard";
+import Categories from "../components/navbar/Categories";
+import { Hero } from "@/components/Hero";
 
 interface HomeProps {
   searchParams: IListingsParams;
@@ -35,14 +35,14 @@ const Home = async ({ searchParams }: HomeProps) => {
       <Categories />
       <Container>
         <div className="
-          pt-8
+          pt-4
           grid
           grid-cols-1
-          sm:grid-cols-2
+          sm:grid-cols-1
           md:grid-cols-3
           lg:grid-cols-4
-          xl:grid-cols-5
-          2xl:grid-cols-6
+          xl:grid-cols-4
+          2xl:grid-cols-5
           gap-8
         ">
           {listings.map((listing) => {

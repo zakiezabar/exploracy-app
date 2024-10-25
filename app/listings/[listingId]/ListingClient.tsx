@@ -8,11 +8,11 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { differenceInCalendarDays, eachDayOfInterval } from "date-fns";
 
 import { SafeUser, SafeListing, SafeReservation } from "@/app/types";
-import { categories } from "@/app/components/navbar/Categories";
-import Container from "@/app/components/Container";
-import ListingHead from "@/app/components/listings/ListingHead";
-import ListingInfo from "@/app/components/listings/ListingInfo";
-import ListingReservation from "@/app/components/listings/ListingReservation";
+import { categories } from "@/components/navbar/Categories";
+import Container from "@/components/Container";
+import ListingHead from "@/components/listings/ListingHead";
+import ListingInfo from "@/components/listings/ListingInfo";
+import ListingReservation from "@/components/listings/ListingReservation";
 
 import useLoginModal from "@/app/hooks/useLoginModal";
 

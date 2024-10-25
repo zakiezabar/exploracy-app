@@ -1,7 +1,6 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { AiOutlineMenu } from 'react-icons/ai';
 import Avatar from '../Avatar';
 import { useCallback, useState } from 'react';
 import MenuItem from './MenuItem';
@@ -58,24 +57,24 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     <div className="relative">
       {currentUser ? (
         <div className="flex flex-row items-center gap-3">
-          <div
-            onClick={activityType}
-            className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-primary-100 hover:shadow-md transition cursor-pointer"
-          >
-            Create Activity
+          <div className="flex gap-2 items-center font-bold">
+
+            <MenuItem onClick={() => router.push("/trips")} label="Leadeboard" iconSrc="/icons/Award.svg"/>
+            <MenuItem onClick={activityType} label="Create Activity" iconSrc="/icons/Plus square.svg" />
+            <MenuItem onClick={() => router.push("")} label="Inbox" iconSrc="/icons/Message circle.svg" />
           </div>
           <div
-            onClick={toggleOpen}
-            className="p-4 md:py-1 md:px-2 border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:bg-primary-100 hover:shadow-md transition"
-          >
-            <AiOutlineMenu />
-            <div className="hidden md:block">
-              <Avatar src={currentUser?.image} />
-            </div>
+            onMouseEnter={toggleOpen}
+            className="border-neutral-200 items-center cursor-pointer"
+            >
+              <div className="md:block">
+                <Avatar src={currentUser?.image} />
+              </div>
           </div>
           {isOpen && (
             <div
-              className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm"
+              onMouseLeave={toggleOpen}
+              className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm font-normal"
             >
               <div className="flex flex-col cursor-pointer">
                 <MenuItem onClick={() => router.push("/trips")} label="My bookings" />

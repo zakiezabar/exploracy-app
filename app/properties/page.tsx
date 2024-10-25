@@ -1,5 +1,5 @@
-import EmptyState from "../components/EmptyState";
-import ClientOnly from "../components/ClientOnly";
+import EmptyState from "../../components/EmptyState";
+import ClientOnly from "../../components/ClientOnly";
 import PropertiesClient from "./PropertiesClient";
 
 import getCurrentUser from "../actions/getCurrentUser";

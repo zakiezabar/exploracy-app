@@ -9,27 +9,27 @@ import { usePathname, useSearchParams } from "next/navigation";
 export const categories = [
     {
         label: 'Outdoor adventures',
-        icon: '/images/icon-Outdoor.png',
+        icon: '/icons/category-outdoor.svg',
         description: 'Hiking, camping, rock or mountain climbing'
     },
     {
         label: 'Water activities',
-        icon: '/images/icon-Water wanderer.png',
+        icon: '/icons/category-water-wanderer.svg',
         description: 'Kayaking, surfing, diving, fishing'
     },
     {
-        label: 'Sports and games',
-        icon: '/images/icon-Sports.png',
-        description: 'Football, basketball, paintball, badminton'
+        label: 'Sports and fitness',
+        icon: '/icons/category-sports.svg',
+        description: 'Football, basketball, paintball, badminton, yoga, pilates, meditation, boot camps, gym'
     },
     {
-        label: 'Fitness and wellbeing',
-        icon: '/images/icon-Fitness.png',
-        description: 'Yoga, pilates, meditation, boot camps, gym'
+        label: 'Indoor fun',
+        icon: '/icons/category-indoor.svg',
+        description: 'booard games, chess, cards, video games, escape rooms, karaoke, bowling, billiards, darts, table tennis, pool, foosball, laser tag, shooting, axe throwing, go-karting, trampoline park, roller skating, ice skating, bowling, mini golf, boot camps'
     },
     {
         label: 'Cultural and Educational',
-        icon: '/images/icon-Fitness.png',
+        icon: '/icons/category-cultural.svg',
         description: 'Historical tours, museum, webinar'
     },
 ]
@@ -47,12 +47,14 @@ const Categories = () => {
     
     return ( 
     <Container>
+        <div className="text-2xl text-mono-900 font-bold py-4 ">
+            Explore others
+        </div>
         <div className="
-        pt-4
         flex
         flex-row
         items-center
-        justify-between
+        gap-2
         overflow-x-auto
         text-center	
         ">
