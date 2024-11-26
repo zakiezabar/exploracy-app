@@ -28,16 +28,18 @@ const StateSelect: React.FC<StateSelectProps> = ({
                 value={value}
                 onChange={(value) => onChange(value as StateSelectValue)}
                 formatOptionLabel={(option: any) => (
-                    <div className="flex flex-row items-center gap-3">
+                    <div className="flex flex-row items-center gap-2">
                         <div>{option.label}</div>
                     </div>
                 )}
                 classNames={{
-                    control: () => 'p-3 border-2',
+                    control: () => 'p-2 border-2',
                     input: () => 'text-lg',
-                    option: () => 'text-lg'
+                    option: () => 'text-md'
+                    
                 }}
                 theme={(theme) => ({
+                    
                     ...theme,
                     borderRadius: 8,
                     colors: {

@@ -9,10 +9,11 @@ import Image from 'next/image';
 interface CategoryBoxProps {
   icon: React.ComponentType<{ size: number}> | string;
   label: string;
+  label2?: string;
   selected?: boolean;
 }
 
-const CategoryBox: React.FC<CategoryBoxProps> = ({ icon: Icon, label, selected }) => {
+const CategoryBox: React.FC<CategoryBoxProps> = ({ icon: Icon, label, label2, selected }) => {
   const router = useRouter();
   const params = useSearchParams();
 
@@ -50,8 +51,7 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({ icon: Icon, label, selected }
     flex-col
     items-center
     gap-x-8
-    min-w-[160px]
-    h-[112px]
+    min-w-[180px]
     p-3
     border-b-4
     hover:text-secondary-400
@@ -68,8 +68,13 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({ icon: Icon, label, selected }
         React.createElement(Icon, { size: 64 }) :
         <Image src={Icon} alt={label} width={64} height={64} />
         }
-        <div className="font-medium text-sm">
+        <div className="flex flex-col text-sm">
+          <div className="font-semibold text-mono-900">
             {label}
+          </div>
+          <div className="font-normal text-mono-600">
+            {label2}
+          </div>
         </div>
     </div>
   );

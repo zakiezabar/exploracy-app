@@ -5,7 +5,7 @@ import { BiDollar } from 'react-icons/bi';
 
 interface InputProps {
   id: string;
-  label: string;
+  label?: string;
   type?: string;
   disabled: boolean;
   formatPrice?: boolean;
@@ -40,9 +40,10 @@ const Input: React.FC<InputProps> = ({
         // />
         <span
           className="
-      text-neutral-700
+      text-neutral-400
       absolute
-      top-5
+      top-[20px]
+      text-sm
       left-2
     "
         >
@@ -58,11 +59,10 @@ const Input: React.FC<InputProps> = ({
         className={`
         peer
         w-full
-        p-2
-        pt-6
+        p-4
         bg-white
         border-2
-        rounded-md
+        rounded-lg
         outline-none
         transition
         disabled:opacity-70
@@ -77,7 +77,7 @@ const Input: React.FC<InputProps> = ({
       <label
         className={`
         absolute
-        text-sm
+        text-xs
         duration-150
         transform
         -translate-y-3

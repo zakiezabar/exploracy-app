@@ -12,6 +12,7 @@ import SearchModal from '../components/modals/SearchModal';
 import ToasterProvider from './providers/ToasterProvider';
 import getCurrentUser from './actions/getCurrentUser';
 import EmptyModal from '../components/modals/EmptyModal';
+import MobileHeader from '@/components/MobileHeader';
 
 export const metadata: Metadata = {
   title: 'Exploracy',
@@ -39,9 +40,10 @@ export default async function RootLayout({
           <EmptyModal />
           <LoginModal />
           {/* <RegisterModal /> */}
-          <Navbar currentUser={currentUser} />
+          <MobileHeader currentUser={currentUser}/>
+          <Navbar currentUser={currentUser} className="hidden lg:flex"/>
         </ClientOnly>
-        <main className="h-full px-4 lg:px-10 lg:pt-24">
+        <main className="h-full px-4 lg:px-10 pt-24">
           <div className="mx-auto h-full">
             {children}
           </div>

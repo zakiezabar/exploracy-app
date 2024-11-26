@@ -24,10 +24,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 
     return ( 
         <CldUploadWidget
-            onUpload={handleUpload}
+            onSuccess={handleUpload}
             uploadPreset="ob5amstl"
             options={{
-                maxFiles: 2
+                maxFiles: 1
             }}
         >
             {({ open }) => {
@@ -51,7 +51,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                             text-neutral-600
                         "
                     >
-                    <TbPhotoPlus size={64} />
+                    <TbPhotoPlus size={44} />
                         <div className="font-semibold text-lg">
                             Click to upload
                         </div>

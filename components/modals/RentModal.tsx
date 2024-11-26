@@ -127,7 +127,7 @@ const RentModal = () => {
     }, [step]);
 
     let bodyContent = (
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-2">
             <Heading
             title="Which of these best describes your activity?"
             subtitle="Select a category"/>
@@ -135,8 +135,8 @@ const RentModal = () => {
             grid
             grid-cols-1
             md:grid-cols-2
-            gap-3
-            max-h-[50vh]
+            gap-2
+            max-h-[60vh]
             overflow-y-auto
             ">
                 {categories.map((item) => (
@@ -169,7 +169,7 @@ const RentModal = () => {
                 /> */}
                 <Input 
                     id="locationDetails"
-                    label="Enter the landmark to your location or any instructions to help guests reach your activity place."
+                    label="Enter the landmark to your location."
                     disabled={isLoading}
                     register={register}
                     errors={errors}
@@ -184,7 +184,7 @@ const RentModal = () => {
             <div className="flex flex-col gap-8">
                 <Heading
                     title="How would you describe this activity?"
-                    subtitle="Describe what makes this activity unique and help quests to understand what they can expect. Whether it's thrilling, relaxing or educational."
+                    subtitle="Describe what makes this activity unique and help quests to understand what they can expect."
                 />
                 <Input 
                     id="title"
@@ -225,7 +225,7 @@ const RentModal = () => {
                 />
                 <Input 
                     id="whatsIncluded"
-                    label="What's included in this activity?. Make sure to note any special perks or features."
+                    label="What's included in this activity (special perks or features)?."
                     disabled={isLoading}
                     register={register}
                     errors={errors}
@@ -269,7 +269,7 @@ const RentModal = () => {
                 />
                 <Input
                     id="price"
-                    label="Price"
+                    // label="Price"
                     formatPrice
                     type="number"
                     disabled={isLoading}

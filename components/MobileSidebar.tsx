@@ -1,26 +1,29 @@
-'use client';
-
 import { useRouter } from 'next/navigation';
-import Avatar from '../Avatar';
+import Avatar from '@/components/Avatar';
 import { useCallback, useState } from 'react';
-import MenuItem from './MenuItem';
+import MenuItem from '@/components/navbar/MenuItem';
 import useRegisterModal from '@/app/hooks/useRegisterModal';
 import useLoginModal from '@/app/hooks/useLoginModal';
 import useRentModal from '@/app/hooks/useRentModal';
 import usePrivateRentModal from '@/app/hooks/usePrivateRentModal';
 import useEmptyModal from '@/app/hooks/useEmptyModal';
-import ActivityTypeModal from '../modals/ActivityTypeModal';
+import ActivityTypeModal from '@/components/modals/ActivityTypeModal';
 
+import { Sheet, SheetTrigger, SheetContent } from '@/components/ui/sheet';
+import { PanelRight } from 'lucide-react';
 import { signIn, signOut } from 'next-auth/react';
 import { SafeUser } from '@/app/types';
-import Button from '../Button';
+import Button from '@/components/Button';
 import { FcGoogle } from 'react-icons/fc';
+import Logo from '@/components/navbar/Logo';
+import UserMenu from './navbar/UserMenu';
 
-interface UserMenuProps {
+
+interface MobileSidebarProps {
   currentUser?: SafeUser | null;
 }
 
-const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
+const MobileSidebar: React.FC<MobileSidebarProps> = ({ currentUser }) => {
   const router = useRouter();
   const { onOpen: onRentModalOpen } = useRentModal();
   const { onOpen: onPrivateModalOpen } = usePrivateRentModal();
@@ -54,12 +57,19 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   }, [currentUser, loginModal]);
 
   return (
-    <div className="relative">
-      {currentUser ? (
-        <div className="flex flex-col md:flex-row items-center gap-3">
-          <div className="flex gap-2 items-center font-bold">
+    <Sheet>
+      <SheetTrigger className="">
+        <PanelRight className="text-mono-900 hover:text-primary-200" />
+      </SheetTrigger>
+      <SheetContent className="bg-primary-400 flex flex-col justify-between p-8 z-[100]" side="left">
+        <div className="py-8">
+          <Logo/>
+        </div>
+        {currentUser ? (
+        <div className="flex flex-col justify-between gap-8">
+          <div className="flex flex-col gap-2 font-bold">
 
-            <MenuItem onClick={() => router.push("/trips")} label="Leaderboard" iconSrc="/icons/Award.svg"/>
+            <MenuItem onClick={() => router.push("/trips")} label="Leadeboard" iconSrc="/icons/Award.svg"/>
             <MenuItem onClick={activityType} label="Create Activity" iconSrc="/icons/Plus square.svg" />
             <MenuItem onClick={() => router.push("")} label="Inbox" iconSrc="/icons/Message circle.svg" />
           </div>
@@ -67,7 +77,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             onMouseEnter={toggleOpen}
             className="border-neutral-200 items-center cursor-pointer"
             >
-              <div className="md:block">
+              <div className="md:block flex flex-row justify-end md:justify-normal">
                 <Avatar src={currentUser?.image} />
               </div>
           </div>
@@ -98,15 +108,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           />
         </div>
       )}
-
-      <ActivityTypeModal
-        isOpen={isActivityModalOpen}
-        onClose={() => setIsActivityModalOpen(false)}
-        onPublic={onRentModalOpen}
-        onPrivate={onPrivateModalOpen}
-      />
-    </div>
+        
+      </SheetContent>
+    </Sheet>
   );
 };
 
-export default UserMenu;
+export default MobileSidebar;
