@@ -54,7 +54,7 @@ const Categories = () => {
     <Container>
         <div className="text-mono-900 font-bold py-4 flex flex-col">
             <p className="text-2xl ">
-            Explore others' activities
+            Explore others&apos; activities
             </p>
         </div>
         <div className="
