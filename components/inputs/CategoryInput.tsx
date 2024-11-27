@@ -39,7 +39,8 @@ const CategoryInput: React.FC<CategoryInputProps> = ({
         transition
         cursor-pointer
         ${selected ? 'border-black' : 'border-neutral-200'}
-        ${selected ? 'bg-slate-100' : 'none'}
+        ${selected ? 'bg-slate-100' : 'bg-white'}
+        ${selected ? 'shadow-lg shadow-primary-400/40' : 'shadow-none'}
         ${error && isRequired && !selected ? 'border-red-500' : ''}
         `}
     >

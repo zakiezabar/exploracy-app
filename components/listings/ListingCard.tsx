@@ -10,6 +10,8 @@ import { format } from "date-fns";
 import Image from "next/image";
 import HeartButton from "../HeartButton";
 import Button from "../Button";
+import { get } from "http";
+import { LocationPinIcon } from "../svg/location-pin";
 
 interface ListingCardProps {
     data: SafeListing;
@@ -28,13 +30,14 @@ const ListingCard: React.FC<ListingCardProps> = ({
     disabled,
     actionLabel,
     actionId = "",
-    currentUser
+    currentUser,
 }) => {
     const router = useRouter();
     const { getByValue } = useMalaysianStates();
 
     // const title = data.title.length > 26 ? data.title.substring(0, 25) + '...' : data.title;
     const title = data.title;
+    const category = getByValue(data.category)
     
     const location = getByValue(data.locationValue);
     console.log("Location data:", location);
@@ -75,7 +78,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
             className="
                 col-span-1 cursor-pointer group
         ">
-            <div className="flex flex-col gap-2 -full mb-8">
+            <div className="flex flex-col gap-2 w-full mb-0 md:mb-8">
                 <div className=" w-full relative overflow-hidden rounded-xl h-[360px]">
                     <Image
                         fill
@@ -89,10 +92,13 @@ const ListingCard: React.FC<ListingCardProps> = ({
                             currentUser={currentUser}
                         />
                     </div>
+                    <div className="absolute top-2 left-2 opacity-100 px-2 py-1 bg-primary-400/90 rounded-lg border-primary-600 border-2">
+                        <p className=" text-mono-900 text-xs">{data.category}</p>
+                    </div>
                 </div>
-                <div className="flex flex-col gap-1 text-sm text-mono-900 capitalize">
+                <div className="flex flex-col text-base text-mono-900 capitalize">
                     <div className="font-bold line-clamp-2">{title}</div>
-                    <div className="font-normal truncate">{location?.label}</div>
+                    <div className="font-normal truncate flex flex-row items-center"><LocationPinIcon />{location?.label}</div>
                     <div className="flex flex-row item-center gap-1 text-mono-900">
                     <div className="">
                         MYR {price}
@@ -101,16 +107,16 @@ const ListingCard: React.FC<ListingCardProps> = ({
                         <div className="font-normal">/pax</div>
                     )}
                 </div>
-                </div>
+            </div>
                 
-                {onAction && actionLabel && (
-                    <Button
-                        disabled={disabled}
-                        small
-                        label={actionLabel}
-                        onClick={handleCancel}
-                    />
-                )}
+            {onAction && actionLabel && (
+                <Button
+                    disabled={disabled}
+                    small
+                    label={actionLabel}
+                    onClick={handleCancel}
+                />
+            )}
             </div>
         </div>
      );

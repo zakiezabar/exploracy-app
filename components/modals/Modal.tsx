@@ -69,7 +69,7 @@ const Modal: React.FC<ModalProps> = ({
     >
       <div
         className={`relative 
-        ${fullscreen ? 'w-full h-full z-50 ' : 'md:w-4/6 lg:w-3/6 xl:w-2/5 my-6 mx-auto lg:h-auto md:h-auto'}
+        ${fullscreen ? 'w-full h-full z-50 ' : 'md:w-4/6 lg:w-3/6 xl:w-2/5 my-6 mx-4 lg:h-auto md:h-auto'}
         `}
       >
         <div
@@ -84,7 +84,7 @@ const Modal: React.FC<ModalProps> = ({
               <IoMdClose size={18} />
             </button>
           </div>
-          <div className="relative flex items-center justify-center px-16 flex-auto bg-mono-100">
+          <div className="relative flex items-center justify-center p-4 flex-auto bg-mono-100">
             <div className="w-full lg:w-[500px]">
               {body}
             </div>

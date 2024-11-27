@@ -14,7 +14,10 @@ export default async function getListings(
             category
         } = params;
 
-        let query: any = {};
+        let query: any = {
+            // Always filter for approved listings
+            approved: true
+        };
 
         if (userId) {
             query.userId = userId;

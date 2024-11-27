@@ -43,7 +43,7 @@ export default async function RootLayout({
           <MobileHeader currentUser={currentUser}/>
           <Navbar currentUser={currentUser} className="hidden lg:flex"/>
         </ClientOnly>
-        <main className="h-full px-4 lg:px-10 pt-24">
+        <main>
           <div className="mx-auto h-full">
             {children}
           </div>

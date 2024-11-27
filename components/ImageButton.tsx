@@ -19,7 +19,7 @@ const ImageButton: React.FC<ImageButtonProps> = ({ imageSrc, title, onClick, dis
         disabled ? 'opacity-50 cursor-not-allowed' : 'opacity-100 border-2 hover:bg-slate-100 cursor-pointer'
       }`}
     >
-      <div className="relative w-16 h-16 mb-2">
+      <div className="relative w-24 h-16 mb-2">
         <Image
           src={imageSrc}
           alt={title}

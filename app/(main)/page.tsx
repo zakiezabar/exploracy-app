@@ -1,13 +1,13 @@
 export const dynamic = "force-dynamic"; // Ensure dynamic rendering
 
-import getCurrentUser from "./actions/getCurrentUser";
-import getListings, { IListingsParams } from "./actions/getListings";
+import getCurrentUser from "../actions/getCurrentUser";
+import getListings, { IListingsParams } from "../actions/getListings";
 
-import ClientOnly from "../components/ClientOnly";
-import Container from "../components/Container";
-import EmptyState from "../components/EmptyState";
-import ListingCard from "../components/listings/ListingCard";
-import Categories from "../components/navbar/Categories";
+import ClientOnly from "../../components/ClientOnly";
+import Container from "../../components/Container";
+import EmptyState from "../../components/EmptyState";
+import ListingCard from "../../components/listings/ListingCard";
+import Categories from "../../components/navbar/Categories";
 import { Hero } from "@/components/Hero";
 
 interface HomeProps {
@@ -21,11 +21,13 @@ const Home = async ({ searchParams }: HomeProps) => {
 
   if (listings.length === 0) {
     return (
-      <ClientOnly>
-        <Hero />
-        <Categories />
-        <EmptyState showReset/>
-      </ClientOnly>
+      <div className="px-4">
+        <ClientOnly>
+          <Hero />
+          <Categories />
+          <EmptyState showReset/>
+        </ClientOnly>
+      </div>
     )
   }
 
@@ -44,6 +46,7 @@ const Home = async ({ searchParams }: HomeProps) => {
           xl:grid-cols-4
           2xl:grid-cols-5
           gap-8
+          pb-16
         ">
           {listings.map((listing) => {
             return (

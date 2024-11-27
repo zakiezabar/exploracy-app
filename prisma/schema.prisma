@@ -84,6 +84,7 @@ model Listing {
   userId          String   @db.ObjectId
   price           Int
   public          Boolean  @default(true)
+  approved        Boolean  @default(false)
   capacityLimit   Int?
 
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)

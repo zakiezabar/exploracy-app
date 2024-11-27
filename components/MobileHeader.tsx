@@ -18,7 +18,7 @@ interface MobileHeaderProps {
 
 const MobileHeader: React.FC<MobileHeaderProps> = ({ currentUser, className }) => {
     return (
-        <nav className="lg:hidden px-6 py-8 h-[50px] flex flex-row items-center bg-mono-100 border-b fixed top-0 w-full z-50 text-mono-200">
+        <nav className="lg:hidden px-6 py-8 h-[50px] flex flex-row items-center bg-mono-100 border-b fixed top-0 w-full z-40 text-mono-200">
             <MobileSidebar currentUser={currentUser}/>
         </nav>
     );

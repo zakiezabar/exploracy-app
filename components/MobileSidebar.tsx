@@ -110,7 +110,14 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({ currentUser }) => {
       )}
         
       </SheetContent>
+      <ActivityTypeModal
+        isOpen={isActivityModalOpen}
+        onClose={() => setIsActivityModalOpen(false)}
+        onPublic={onRentModalOpen}
+        onPrivate={onPrivateModalOpen}
+      />
     </Sheet>
+    
   );
 };
 
