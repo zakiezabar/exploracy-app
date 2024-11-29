@@ -10,8 +10,8 @@ const Avatar: React.FC<AvatarProps> = ({ src }) => {
   return (
     <Image
       className="rounded-full hover:shadow-lg transition"
-      height="44"
-      width="44"
+      height="42"
+      width="42"
       alt="Avatar"
       src={src || '/images/placeholder.png'}
     />

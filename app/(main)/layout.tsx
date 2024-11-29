@@ -1,3 +1,4 @@
+import FooterNavigation from "@/components/FooterNav";
 import { ReactNode } from "react";
 
 interface MainLayoutProps {
@@ -10,6 +11,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       <div className="mx-auto h-full">
         {children}
       </div>
+      <FooterNavigation />
     </div>
   );
 };

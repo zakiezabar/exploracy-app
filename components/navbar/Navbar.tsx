@@ -20,8 +20,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser, className }) => {
       className,
     )}>
       <div className="flex flex-col md:flex-row gap-4">
-        <Image src="/exploracy-full-dark.svg" width={200} height={44} alt="Exploracy" className="md:hidden"/>
         <Logo />
+        {/* <Image src="/exploracy-full-dark.svg" width={200} height={44} alt="Exploracy" className="md:hidden"/> */}
         <Search />
       </div>
       <div className="flex gap-2 items-center">
