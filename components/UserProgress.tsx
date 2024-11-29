@@ -10,11 +10,11 @@ type Props = {
 export const UserProgress = ({ badgeIcon, badgeName, points, level }: Props ) => {
     return (
         <div className="flex items-center justify-between w-full md:w-[300px]">
-            <div className="flex flex-row items-center gap-x-2">
+            <div className="flex flex-row items-center gap-x-2 ">
                 <Image
-                    src="/exploracy-icon-main.svg"
+                    src="/exploracy-icon-dark.svg"
                     alt="logo"
-                    className="rounded-md border md:w-11 md:h-11 w-8 h-8" 
+                    className="rounded-md border-primary-600 border-2 md:w-11 md:h-11 w-8 h-8 bg-primary-400 p-1" 
                     width={44}
                     height={44}
                 />

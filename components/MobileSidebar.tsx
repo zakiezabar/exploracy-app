@@ -17,6 +17,7 @@ import Button from '@/components/Button';
 import { FcGoogle } from 'react-icons/fc';
 import Logo from '@/components/navbar/Logo';
 import UserMenu from './navbar/UserMenu';
+import Image from 'next/image';
 
 
 interface MobileSidebarProps {
@@ -61,6 +62,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({ currentUser }) => {
       <SheetTrigger className="">
         <PanelRight className="text-mono-900 hover:text-primary-200" />
       </SheetTrigger>
+      <Image src="/exploracy-full-main.svg" alt="Exploracy" width={140} height={140} />
       <SheetContent className="bg-primary-400 flex flex-col justify-between p-8 z-[100]" side="left">
         <div className="py-8">
           <Logo/>
