@@ -9,23 +9,23 @@ type Props = {
 
 export const UserProgress = ({ badgeIcon, badgeName, points, level }: Props ) => {
     return (
-        <div className="flex items-center justify-between gap-x-4 min-w-[300px]">
-            <div className="flex items-center gap-x-2">
+        <div className="flex items-center justify-between w-full md:w-[300px]">
+            <div className="flex flex-row items-center gap-x-2">
                 <Image
                     src="/exploracy-icon-main.svg"
                     alt="logo"
-                    className="rounded-md border" 
+                    className="rounded-md border md:w-11 md:h-11 w-8 h-8" 
                     width={44}
                     height={44}
                 />
                 <div>
-                    <p className="text-secondary-600 text-xs">Level {level} </p>
-                    <p className="font-bold text-base">{badgeName}</p>  
+                    <p className="text-secondary-300 text-xs">Level {level} </p>
+                    <p className="text-secondary-600 font-bold text-sm md:text-base">{badgeName}</p>  
                 </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 text-sm md:text-base">
                 Pts.
-                <div className="flex bg-secondary-600 text-lg text-primary-400 h-[44px] w-[44px] items-center justify-center rounded-md">
+                <div className="flex bg-secondary-600 text-md md:text-lg text-primary-400 p-2 items-center justify-center rounded-md">
                     {points}
                 </div>
             </div>
