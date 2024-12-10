@@ -59,7 +59,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
         <div className="flex flex-col md:flex-row items-center gap-3">
           <div className="flex gap-2 items-center font-bold">
 
-            <MenuItem onClick={() => router.push("/trips")} label="Leaderboard" iconSrc="/icons/Award.svg"/>
+            <MenuItem onClick={() => router.push("/leaderboard")} label="Leaderboard" iconSrc="/icons/Award.svg"/>
             <MenuItem onClick={activityType} label="Create Activity" iconSrc="/icons/Plus square.svg" />
             <MenuItem onClick={() => router.push("")} label="Inbox" iconSrc="/icons/Message circle.svg" />
           </div>
@@ -77,7 +77,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
               className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm font-normal"
             >
               <div className="flex flex-col cursor-pointer">
-                <MenuItem onClick={() => router.push("/trips")} label="My bookings" />
+                <MenuItem onClick={() => router.push("/bookings")} label="My bookings" />
                 <MenuItem onClick={() => router.push("/favorites")} label="My favorites" />
                 <MenuItem onClick={() => router.push("/reservations")} label="My reservations" />
                 <MenuItem onClick={() => router.push("/properties")} label="My listing activities" />

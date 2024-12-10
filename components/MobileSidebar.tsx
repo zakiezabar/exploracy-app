@@ -1,3 +1,5 @@
+"use client"
+
 import { useRouter } from 'next/navigation';
 import Avatar from '@/components/Avatar';
 import { useCallback, useState } from 'react';
@@ -26,99 +28,35 @@ interface MobileSidebarProps {
 
 const MobileSidebar: React.FC<MobileSidebarProps> = ({ currentUser }) => {
   const router = useRouter();
-  const { onOpen: onRentModalOpen } = useRentModal();
-  const { onOpen: onPrivateModalOpen } = usePrivateRentModal();
-  const { onOpen: onEmptyModalOpen } = useEmptyModal();
-
-  const registerModal = useRegisterModal();
-  const loginModal = useLoginModal();
-  const rentModal = useRentModal();
-
-  const [isOpen, SetIsOpen] = useState(false);
-
-  const [isActivityModalOpen, setIsActivityModalOpen] = useState(false);
-
-  const toggleOpen = useCallback(() => {
-    SetIsOpen((value) => !value);
-  }, []);
-
-  const onRent = useCallback(() => {
-    if (!currentUser) {
-      return loginModal.onOpen();
-    }
-    rentModal.onOpen();
-  }, [currentUser, loginModal, rentModal]);
-
-  const activityType = useCallback(() => {
-    if (!currentUser) {
-      loginModal.onOpen();
-    } else {
-      setIsActivityModalOpen(true);
-    }
-  }, [currentUser, loginModal]);
 
   return (
     <header className="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-10">
       <div className="flex flex-row justify-between items-center p-4">
-        {/* <Sheet>
-          <SheetTrigger>
-            <PanelRight className="text-mono-900 hover:text-primary-200" />
-          </SheetTrigger>
-          <SheetContent className="bg-primary-400 flex flex-col justify-between p-8 z-[100]" side="left">
+        <Logo />
+        <div className="md:block flex flex-row justify-end md:justify-normal">
           {currentUser ? (
-            <div className="flex flex-col justify-between gap-8">
-              <div className="flex flex-col gap-2 font-bold">
-
-                <MenuItem onClick={() => router.push("/trips")} label="Leadeboard" iconSrc="/icons/Award.svg"/>
-                <MenuItem onClick={activityType} label="Create Activity" iconSrc="/icons/Plus square.svg" />
-                <MenuItem onClick={() => router.push("")} label="Inbox" iconSrc="/icons/Message circle.svg" />
-              </div>
+            <div className="flex flex-col md:flex-row items-center gap-3">
               <div
-                onMouseEnter={toggleOpen}
+                onClick={() => router.push("/account")}
                 className="border-neutral-200 items-center cursor-pointer"
                 >
-                  <div className="md:block flex flex-row justify-end md:justify-normal">
+                  <div className="md:block">
                     <Avatar src={currentUser?.image} />
                   </div>
               </div>
-              {isOpen && (
-              <div
-                onMouseLeave={toggleOpen}
-                className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm font-normal"
-              >
-                <div className="flex flex-col cursor-pointer">
-                  <MenuItem onClick={() => router.push("/trips")} label="My bookings" />
-                  <MenuItem onClick={() => router.push("/favorites")} label="My favorites" />
-                  <MenuItem onClick={() => router.push("/reservations")} label="My reservations" />
-                  <MenuItem onClick={() => router.push("/properties")} label="My listing activities" />
-                  <MenuItem onClick={activityType} label="Create new activity" />
-                  <hr />
-                  <MenuItem onClick={() => signOut()} label="Logout" />
-                </div>
-              </div>
-            )}
-          </div>
+            </div>
           ) : (
-          <div className="flex flex-row items-center gap-4">
-            <Button
-              outline
-              label="Login with Google"
-              icon={FcGoogle}
-              onClick={() => signIn('google')}
+            <div className="flex flex-row items-center gap-4">
+              <Button
+                outline
+                rounded
+                // label="Login"
+                icon={FcGoogle}
+                onClick={() => signIn('google')}
               />
-          </div>
-        )}
-        </SheetContent>
-          <ActivityTypeModal
-          isOpen={isActivityModalOpen}
-          onClose={() => setIsActivityModalOpen(false)}
-          onPublic={onRentModalOpen}
-          onPrivate={onPrivateModalOpen}
-          />
-        </Sheet> */}
-        <Logo />
-        <div className="md:block flex flex-row justify-end md:justify-normal">
-          <Avatar src={currentUser?.image} />
+            </div>
+          )}
+          {/* <Avatar src={currentUser?.image} /> */}
         </div>
       </div>
     </header>

@@ -25,7 +25,7 @@ export const UserProgress = ({ badgeIcon, badgeName, points, level }: Props ) =>
             </div>
             <div className="flex items-center gap-2 text-sm md:text-base">
                 Pts.
-                <div className="flex bg-secondary-600 text-md md:text-lg text-primary-400 p-2 items-center justify-center rounded-md">
+                <div className="flex min-w-[44px] bg-secondary-600 text-md md:text-lg text-primary-400 p-2 items-center justify-center rounded-md">
                     {points}
                 </div>
             </div>

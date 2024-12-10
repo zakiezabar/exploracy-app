@@ -34,7 +34,7 @@ model User {
   coverImage      String?
   profileImage    String?
   hasNotification Boolean?
-  points          Int?
+  points          Int       @default(5)
 
   role      Role     @default(USER)
   accounts     Account[]

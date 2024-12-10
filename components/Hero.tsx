@@ -1,21 +1,34 @@
-// import Image from "next/image";
-import React from "react";
+"use client"
+
+import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button";
-import Image from "next/image";
 import { UserProgress } from "./UserProgress";
 
 export const Hero: React.FC = () => {
-  // return (
-  //     <div className="bg-slate-400 w-full">
-  //         <div className="flex items-center gap-x-2">
-  //             <UserProgress
-  //                 badgeIcon={"badgeIcon"}
-  //                 badgeName={"badgeName"}
-  //                 points={100}
-  //             />
-  //         </div>
-  //     </div>
-  // )
+  const [points, setPoints] = useState(0);
+
+  useEffect(() => {
+    async function fetchPoints() {
+      try {
+        const response = await fetch(`/api/users/points`, {
+          method: "GET", // Default is GET, but it's good to specify
+          credentials: "include", // Ensure cookies/session are included in the request
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setPoints(data.points || 0);
+        } else {
+          console.error("Failed to fetch points:", await response.json());
+        }
+      } catch (error) {
+        console.error("Error fetching points:", error);
+      }
+    }
+
+    fetchPoints();
+  }, []);
+  
   return (
     <div className="flex flex-col-reverse md:flex-row gap-4 w-full ">
       <div className="relative bg-[url('/images/hero-main.jpg')] bg-cover bg-top h-[400px] md:h-[300px] w-full flex flex-col justify-end items-end rounded-2xl p-4">
@@ -41,10 +54,10 @@ export const Hero: React.FC = () => {
         <div className="relative flex flex-row-reverse items-center justify-between">
           <div className="bg-white rounded-xl p-2 shadow-md hover:shadow-lg shadow-mono-900/20 w-full">
               <UserProgress
-                      badgeIcon={"badgeIcon"}
-                      badgeName={"Warm-up"}
-                      level={1}
-                      points={100}
+                badgeIcon={"badgeIcon"}
+                badgeName={"Warm-up"}
+                level={1}
+                points={points}
               />
           </div>   
         </div>
@@ -56,6 +69,5 @@ export const Hero: React.FC = () => {
         </div>
       </div>
     </div>
-    
   );
 };

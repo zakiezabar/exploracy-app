@@ -1,11 +1,11 @@
-import EmptyState from "../../components/EmptyState";
-import ClientOnly from "../../components/ClientOnly";
-import TripsClient from "./TripsClient";
+import EmptyState from "@/components/EmptyState";
+import ClientOnly from "@/components/ClientOnly";
+import BookingsClient from "./BookingsClient";
 
-import getCurrentUser from "../actions/getCurrentUser";
-import getReservations from "../actions/getReservations";
+import getCurrentUser from "@/app/actions/getCurrentUser";
+import getReservations from "@/app/actions/getReservations";
 
-const TripsPage = async () => {
+const BookingsPage = async () => {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
@@ -36,7 +36,7 @@ const TripsPage = async () => {
 
   return (
     <ClientOnly>
-      <TripsClient
+        <BookingsClient
         reservations={reservations}
         currentUser={currentUser}
       />
@@ -44,4 +44,4 @@ const TripsPage = async () => {
   )
 }
 
-export default TripsPage;
+export default BookingsPage;

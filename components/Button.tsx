@@ -3,12 +3,14 @@
 import { IconType } from 'react-icons';
 
 interface ButtonProps {
-  label: String;
+  label?: String;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   outline?: boolean;
   small?: boolean;
+  rounded?: boolean;
   icon?: IconType;
+  className?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -17,7 +19,9 @@ const Button: React.FC<ButtonProps> = ({
   disabled,
   outline,
   small,
+  rounded,
   icon: Icon,
+  className,
 }) => {
   return (
     <button
@@ -27,13 +31,11 @@ const Button: React.FC<ButtonProps> = ({
     relative
     disabled:opacity-70
     disabled:cursor-not-allowed
-    rounded-lg
     border-2
     border-b-4
     border-primary-500
     hover:opacity-80
     transition
-    w-full
     p-2
     ${outline ? 'bg-white' : 'bg-primary-400'}
     ${outline ? 'border-slate-200' : 'border-primary-500'}
@@ -42,6 +44,8 @@ const Button: React.FC<ButtonProps> = ({
     ${small ? 'text-sm' : 'text-md'}
     ${small ? 'font-semibold' : 'font-bold'}
     ${small ? 'border-[1px]' : 'border-[2px]'}
+    ${rounded ? 'rounded-full flex justify-center items-center w-11 h-11' : 'rounded-lg'}
+    ${className ?? "w-full"}
     `}
     >
       {Icon && (
@@ -49,10 +53,9 @@ const Button: React.FC<ButtonProps> = ({
           size={24}
           className="
         flex
-        inline-flex
         left-4
         top-3
-        mr-4
+        mx-1
         "
         />
       )}
