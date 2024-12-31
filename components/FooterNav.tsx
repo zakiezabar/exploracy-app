@@ -16,7 +16,7 @@ const FooterNavigation = () => {
   ]
 
   return (
-    <nav className="block lg:hidden fixed bottom-0 left-0 right-0 pb-2 bg-white"
+    <nav className="block lg:hidden fixed bottom-0 left-0 right-0 pb-5 bg-white"
       style={{ boxShadow: '0 -16px 16px -1px rgba(0, 0, 0, 0.08), 0 -8px 8px -1px rgba(0, 0, 0, 0.04)' }}
     >
       <ul className="flex justify-around items-center h-18">
