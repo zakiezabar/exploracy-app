@@ -94,14 +94,16 @@ model Listing {
 }
 
 model Reservation {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId     String   @db.ObjectId
-  listingId  String   @db.ObjectId
-  startDate  DateTime
-  endDate    DateTime
-  totalPrice Int
-  createdAt  DateTime @default(now())
-  
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId        String   @db.ObjectId
+  listingId     String   @db.ObjectId
+  startDate     DateTime
+  endDate       DateTime
+  totalPrice    Int
+  createdAt     DateTime @default(now())
+  bookingStatus     String   @default("pending")  // New field: pending, accepted, rejected, completed
+  paymentStatus String   @default("pending") // Can be "pending", "paid", "failed", "cancelled"
+  paymentId     String? // Store stripe session ID
 
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)

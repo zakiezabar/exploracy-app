@@ -14,9 +14,10 @@ export type SafeReservation = Omit<
     createdAt: string;
     startDate: string;
     endDate: string;
-    listing: SafeListing
-}
-
+    listing: SafeListing;
+    paymentStatus?: string;
+    paymentId?: string | null;
+};
 
 export type SafeUser = Omit<
 User,
@@ -26,3 +27,5 @@ User,
     updatedAt: string;
     emailVerified: string | null;
 };
+
+export type PaymentStatus = 'pending' | 'paid' | 'failed' | 'cancelled';

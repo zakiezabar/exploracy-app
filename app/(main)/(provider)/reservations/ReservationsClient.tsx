@@ -23,22 +23,47 @@ const ReservationsClient: React.FC<ReservationsClientProps> = ({
   const router = useRouter();
   const [deletingId, setDeletingId] = useState('');
 
-  const onCancel = useCallback((id: string) => {
-    setDeletingId(id);
+  const onCancel = useCallback(async (id: string) => {
+    try {
+      setDeletingId(id);
 
-    axios.delete(`/api/reservations/${id}`)
-    .then(() => {
-      toast.success("Reservation cancelled");
+      const reservation = reservations.find(r => r.id === id);
+      if (!reservation) return;
+
+      // Show appropriate confirmation message
+      const message = reservation.paymentStatus === "paid"
+        ? "Are you sure you want to cancel this reservation? This will process a refund."
+        : "Are you sure you want to cancel this reservation?";
+
+      if (!window.confirm(message)) {
+        return;
+      }
+
+      await axios.delete(`/api/reservations/${id}`)
+    //   .then(() => {
+    //     toast.success("Reservation cancelled");
+    //     router.refresh();
+    //   })
+    //   .catch(() => {
+    //     toast.error("Something went wrong.");
+    //   })
+    //   .finally(() => {
+    //     setDeletingId('');
+    //   })
+    // }, [router]);
+      const successMessage = reservation.paymentStatus === "paid"
+        ? "Reservation cancelled and refund processed"
+        : "Reservation cancelled successfully";
+
+      toast.success(successMessage);
       router.refresh();
-    })
-    .catch(() => {
-      toast.error("Something went wrong.");
-    })
-    .finally(() => {
+    } catch (error: any) {
+      toast.error(error?.response?.data?.error || "Error cancelling reservation");
+    } finally {
       setDeletingId('');
-    })
-  }, [router]);
-
+    }
+  }, [router, reservations]);
+  
   return ( 
     <Container>
       <div className="pt-4">
@@ -46,14 +71,7 @@ const ReservationsClient: React.FC<ReservationsClientProps> = ({
           title="Reservations"
           subtitle="Bookings on your properties"
         />
-        <div
-          className="
-            mt-10
-            flex
-            flex-col
-            pb-28
-          "
-        >
+        <div className="mt-10 flex flex-col pb-28">
           {reservations.map((reservation) => (
             <ListingCardList
               key={reservation.id}
@@ -61,8 +79,17 @@ const ReservationsClient: React.FC<ReservationsClientProps> = ({
               reservation={reservation}
               actionId={reservation.id}
               onAction={onCancel}
-              disabled={deletingId === reservation.id}
-              actionLabel="Cancel guest reservation"
+              disabled={
+                deletingId === reservation.id || 
+                reservation.bookingStatus === "cancelled"
+              }
+              actionLabel={
+                reservation.bookingStatus === "cancelled"
+                  ? "Cancelled"
+                  : deletingId === reservation.id 
+                    ? "Processing..."
+                    : "Cancel reservation"
+              }
               currentUser={currentUser}
             />
           ))}

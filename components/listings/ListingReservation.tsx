@@ -1,10 +1,12 @@
 'use client';
+import { useRouter } from 'next/navigation';
 
 import { Range } from 'react-date-range';
 import Calendar from '../inputs/Calendar';
 import Button from '../Button';
 
 interface ListingReservationProps {
+  listingId: string;  // Newly added
   price: number;
   dateRange: Range;
   totalPrice: number;
@@ -15,6 +17,7 @@ interface ListingReservationProps {
 }
 
 const ListingReservation: React.FC<ListingReservationProps> = ({
+  listingId,    // Added this
   price,
   dateRange,
   totalPrice,
@@ -23,6 +26,27 @@ const ListingReservation: React.FC<ListingReservationProps> = ({
   disabled,
   disabledDates
 }) => {
+  const router = useRouter();
+
+  const handleReservation = () => {
+    const startDate = dateRange.startDate?.toISOString() || '';
+    const endDate = dateRange.endDate?.toISOString() || '';
+
+    console.log('ListingId being passed:', listingId);
+
+    // Construct URL with query parameters
+    const queryString = new URLSearchParams({
+      listingId,    // Added this
+      price: price.toString(),
+      startDate,
+      endDate,
+      totalPrice: totalPrice.toString(),
+    }).toString();
+
+    console.log('Query string:', queryString); // Add this log
+    router.push(`/listings/review?${queryString}`);
+  };
+
   return ( 
     <div
     className="
@@ -69,7 +93,7 @@ const ListingReservation: React.FC<ListingReservationProps> = ({
         <Button
           disabled={disabled}
           label="Reserve"
-          onClick={onSubmit}
+          onClick={handleReservation}
         />
       </div>
     </div>
