@@ -44,7 +44,7 @@ export default async function RootLayout({
           <PrivateRentModal />
           <EmptyModal />
           <LoginModal />
-          {/* <RegisterModal /> */}
+          <RegisterModal />
           <MobileHeader currentUser={currentUser}/>
           <Navbar currentUser={currentUser} className="hidden lg:flex"/>
         </ClientOnly>
