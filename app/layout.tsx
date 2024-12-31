@@ -17,6 +17,11 @@ import MobileHeader from '@/components/MobileHeader';
 export const metadata: Metadata = {
   title: 'Exploracy',
   description: 'Social activities',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', type: 'image/x-icon' },
+    ]
+  }
 };
 
 const font = Nunito({
