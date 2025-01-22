@@ -87,7 +87,20 @@ const config: Config = {
 				700: '#4E4E4E',
 				800: '#363636',
 				900: '#060318',
-			},
+				},
+				pink: {
+					400: "#FF2D9F",
+				},
+				purple: {
+					400: "#A224DD",
+				},
+				mustard: {
+					600: "#F9C131",
+				},
+				salmon: {
+					400: "#F43F5E",
+				},
+
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

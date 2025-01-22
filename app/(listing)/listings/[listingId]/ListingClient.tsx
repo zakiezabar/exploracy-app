@@ -119,6 +119,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
             locationValue={listing.locationValue}
             id={listing.id}
             currentUser={currentUser}
+            user={listing.user}
           />
           <div className="
             grid

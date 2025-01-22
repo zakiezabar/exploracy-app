@@ -13,6 +13,7 @@ import ToasterProvider from './providers/ToasterProvider';
 import getCurrentUser from './actions/getCurrentUser';
 import EmptyModal from '../components/modals/EmptyModal';
 import MobileHeader from '@/components/MobileHeader';
+import CreateActivityModal from '@/components/modals/CreateActivityModal';
 
 export const metadata: Metadata = {
   title: 'Exploracy',

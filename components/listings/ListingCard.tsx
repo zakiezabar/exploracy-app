@@ -21,6 +21,7 @@ interface ListingCardProps {
     actionLabel?: string;
     actionId?: string;
     currentUser?: SafeUser | null;
+    smallCard?: boolean;
 }
 
 const ListingCard: React.FC<ListingCardProps> = ({
@@ -31,6 +32,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
     actionLabel,
     actionId = "",
     currentUser,
+    smallCard
 }) => {
     const router = useRouter();
     const { getByValue } = useMalaysianStates();

@@ -25,10 +25,10 @@ const ListingCategory: React.FC<ListingCategoryProps> = ({
           <Image src={Icon} alt={label} width={44} height={44} /> // Render image if `Icon` is a URL
         )}
         <div className="flex flex-col">
-          <div className="text-lg font-semibold">
+          <div className="text-base font-semibold">
             {label}
           </div>
-          <div className="text-neutral-500 font-light">
+          <div className="text-sm text-mono-400 font-light">
             {description}
           </div>
         </div>

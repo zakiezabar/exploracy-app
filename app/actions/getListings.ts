@@ -37,10 +37,12 @@ export default async function getListings(
         const safeListings = listings.map((listing) => ({
             ...listing,
             createdAt: listing.createdAt.toISOString(),
+            capacity: listing.guestCount || 1, // Ensure capacity has a default value if null
         }));
 
         return safeListings;
     } catch (error: any) {
-        throw new Error(error);
+        console.error('Error in getListings:', error);
+        throw new Error(error?.message || 'Failed to fetch listings');
     }
 }

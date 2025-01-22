@@ -4,6 +4,7 @@ import { CldUploadWidget } from "next-cloudinary";
 import Image from "next/image";
 import { useCallback } from "react";
 import { TbPhotoPlus } from "react-icons/tb";
+import { BiStar } from "react-icons/bi";
 
 declare global {
     var cloudinary: any;
@@ -40,9 +41,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                             hover:opacity-70
                             transition
                             border-dashed
+                            rounded-xl
                             border-2
                             p-20
-                            border-neutral-300
+                            border-mono-400
                             flex
                             flex-col
                             justify-center
@@ -53,7 +55,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                     >
                     <TbPhotoPlus size={44} />
                         <div className="font-semibold text-lg">
-                            Click to upload
+                            {value ? 'Change image' : 'Click to upload'}
                         </div>
                         {value && (
                             <div className="absolute inset-0 w-full h-full">
@@ -62,6 +64,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                                 fill
                                 style={{ objectFit: 'cover' }}
                                 src={value}
+                                className="rounded-lg"
                             />
                             </div>
                         )}

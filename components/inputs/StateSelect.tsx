@@ -33,10 +33,9 @@ const StateSelect: React.FC<StateSelectProps> = ({
                     </div>
                 )}
                 classNames={{
-                    control: () => 'p-2 border-2',
+                    control: () => 'py-2 border-2 text-sm',
                     input: () => 'text-lg',
-                    option: () => 'text-md'
-                    
+                    option: () => 'text-sm'
                 }}
                 theme={(theme) => ({
                     

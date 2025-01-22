@@ -3,12 +3,13 @@
 import useCountries from '@/app/hooks/useCountries';
 import { SafeUser } from '@/app/types';
 import React from 'react';
-import Avatar from '../Avatar';
+import Avatar from '@/components/Avatar';
 import ListingCategory from './ListingCategory';
 import { categories } from '../navbar/Categories';
 import CategoryInput from '../inputs/CategoryInput';
 import dynamic from 'next/dynamic';
 import Heading from '../Heading';
+import Link from 'next/link';
 
 const Map = dynamic(() => import('../Map'))
 
@@ -47,56 +48,29 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
   const coordinates = getByValue(locationValue)?.latlng;
 
   return (
-    <div className="col-span-4 flex flex-col gap-8 ">
-      <div className="flex flex-row gap-2 justify-between items-center">
-        <div className="flex flex-col">
-          <div
-            className="
-            text-base
-            font-semibold
-            flex
-            flex-row
-            items-center
-            gap-2
-          "
-          >
-            <div>Hosted by {user?.name}</div>
-            <Avatar src={user?.image} />
-          </div>
-          <div
-            className="
-          flex
-          flex-row
-          items-center
-          gap-4
-          font-light
-          text-neutral-500"
-          >
-            <div className="text-sm">Total pax: {guestCount}</div>
-          </div>
+    <div className="col-span-4 flex flex-col gap-8">
+      <div className="flex flex-col">
+        <div className="text-xl font-bold">
+          {locationDetails}<span className="font-normal">, {locationValue}</span>
         </div>
-        <div className="flex flex-col text-right">
-          <div className="text-sm">Difficulty level:</div>
-          <div className="text-base font-light text-neutral-500">
-            {difficulty || "Not specified"} {/* Handle possible undefined value */}
-          </div>
+        <div className="text-lg">
+          {description} 
+        </div>
+        <div className="flex flex-row gap-2 pt-2">
+          <div className="text-mono-600 pr-2 border-r-2 border-mono-400">{guestCount || "Not specified"} pax</div>
+          <div className="text-mono-600">Difficulty: {difficulty || "Normal"}</div>
         </div>
       </div>
-      
-      <hr />
-
-      {category && (
-        <ListingCategory
-          icon={category.icon}
-          label={category.label}
-          description={category.description}
-        />
-      )}
-      <hr />
-      <div className="text-base font-light text-neutral-500">
-        {description}
+      <div className="flex flex-col gap-2 bg-secondary-100 p-4 rounded-xl">
+        {category && (
+          <ListingCategory
+            icon={category.icon}
+            label={category.label}
+            description={category.description}
+          />
+        )}
+        
       </div>
-      <hr />
       <div className="flex flex-col">
         <Heading
           title="What you will do?"
