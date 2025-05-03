@@ -5,7 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "darwin", "darwin-arm64"]
 }
 
@@ -19,7 +19,11 @@ enum Role {
   ADMIN
 }
 
-
+enum InvitationStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+}
 
 model User {
   id              String    @id @default(auto()) @map("_id") @db.ObjectId
@@ -37,16 +41,16 @@ model User {
   hasNotification Boolean?
   points          Int       @default(5)
 
-  role            Role     @default(USER)
-  accounts        Account[]
-  listings        Listing[]
-  reservations    Reservation[]
-  posts           Post[]
-  comments        Comment[]
+  role         Role          @default(USER)
+  accounts     Account[]
+  listings     Listing[]
+  reservations Reservation[]
+  posts        Post[]
+  comments     Comment[]
 
-  notifications   Notification[]
-  badge           Badge[]
-  point           Point[]
+  notifications Notification[]
+  badge         Badge[]
+  point         Point[]
 }
 
 model Account {
@@ -69,11 +73,11 @@ model Account {
 }
 
 model Listing {
-  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  id              String       @id @default(auto()) @map("_id") @db.ObjectId
   title           String
   description     String
   imageSrc        String
-  createdAt       DateTime @default(now())
+  createdAt       DateTime     @default(now())
   category        String
   guestCount      Int
   locationValue   String
@@ -82,17 +86,21 @@ model Listing {
   whatsIncluded   String?
   requirement     String?
   difficulty      String?
-  userId          String   @db.ObjectId
+  userId          String       @db.ObjectId
   price           Int
-  public          Boolean  @default(true)
-  approved        Boolean  @default(false)
+  heroEvent       Boolean      @default(false)
+  public          Boolean      @default(true)
+  approved        Boolean      @default(false)
   capacityLimit   Int?
+  invitations     Invitation[]
 
-  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  reservations    Reservation[]
-  points          Point[]
-  posts           Post[]
-  comments        Comment[]
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reservations Reservation[]
+  points       Point[]
+  posts        Post[]
+  comments     Comment[]
+
+  heroDates    HeroEventDate[]
 }
 
 model Reservation {
@@ -103,12 +111,21 @@ model Reservation {
   endDate       DateTime
   totalPrice    Int
   createdAt     DateTime @default(now())
-  bookingStatus     String   @default("pending")  // New field: pending, accepted, rejected, completed
+  bookingStatus String   @default("pending") // New field: pending, accepted, rejected, completed
   paymentStatus String   @default("pending") // Can be "pending", "paid", "failed", "cancelled"
   paymentId     String? // Store stripe session ID
 
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+}
+
+model HeroEventDate {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  listingId String   @db.ObjectId
+  startDate DateTime
+  endDate   DateTime
+
+  listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
 }
 
 model Badge {
@@ -137,27 +154,27 @@ model Post {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId    String   @db.ObjectId
-  listingId String?   @db.ObjectId
+  listingId String?  @db.ObjectId
   likeIds   String[] @db.ObjectId
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  listing    Listing?  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listing Listing? @relation(fields: [listingId], references: [id], onDelete: Cascade)
 
   comments Comment[]
 }
 
 model Comment {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
   body      String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  userId    String    @db.ObjectId
-  postId    String    @db.ObjectId
-  listingId String?   @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String   @db.ObjectId
+  postId    String   @db.ObjectId
+  listingId String?  @db.ObjectId
 
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  post      Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
-  listing   Listing?  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post    Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  listing Listing? @relation(fields: [listingId], references: [id], onDelete: Cascade)
 }
 
 model Notification {
@@ -167,4 +184,24 @@ model Notification {
   createdAt DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Invitation {
+  id        String           @id @default(auto()) @map("_id") @db.ObjectId
+  email     String
+  token     String           @unique
+  listingId String           @db.ObjectId
+  status    InvitationStatus @default(PENDING)
+  createdAt DateTime         @default(now())
+  expiresAt DateTime
+
+  listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+}
+
+model TestInvitation {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String
+  token     String   @unique
+  status    String   @default("pending")
+  createdAt DateTime @default(now())
 }

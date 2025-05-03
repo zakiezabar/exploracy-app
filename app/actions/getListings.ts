@@ -16,7 +16,8 @@ export default async function getListings(
 
         let query: any = {
             // Always filter for approved listings
-            approved: true
+            approved: true,
+            heroEvent: false
         };
 
         if (userId) {

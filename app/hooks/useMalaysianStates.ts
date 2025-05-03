@@ -21,7 +21,8 @@ const states = [
   { value: 'TRG', label: 'Terengganu' },
   { value: 'KUL', label: 'Kuala Lumpur' },
   { value: 'LBN', label: 'Labuan' },
-  { value: 'PJY', label: 'Putrajaya' }
+  { value: 'PJY', label: 'Putrajaya' },
+  { value: 'ID', label: 'Indonesia' }
 ];
 
 const useMalaysianStates = () => {

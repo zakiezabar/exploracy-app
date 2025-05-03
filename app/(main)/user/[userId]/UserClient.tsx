@@ -11,6 +11,9 @@ import EmptyState from "@/components/EmptyState"; // Component for empty states
 import { useRef } from "react"; // React hook for maintaining references
 import { MoveLeft, MoveRight } from "lucide-react";
 import BackButton from "@/components/BackButton";
+import useEditModal from "@/app/hooks/useEditModal";
+import Button from "@/components/Button";
+import Avatar from "@/components/Avatar";
 
 // Define props interface with types
 interface UserClientProps {
@@ -31,6 +34,8 @@ const UserClient: React.FC<UserClientProps> = ({
   const router = useRouter();
   // Reference to scrollable container
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  const editModal = useEditModal();
 
   // Function to handle horizontal scrolling
   const scroll = (direction: "left" | "right") => {
@@ -54,43 +59,68 @@ const UserClient: React.FC<UserClientProps> = ({
     return <EmptyState title="No user found" subtitle="Try going back" />;
   }
 
+  const isProfileOwner = currentUser?.id === user.id;
+
+  const filteredListings = [...user.listings]
+    .filter((listing) => isProfileOwner || listing.approved === true)
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+
   return (
     <Container>
       <div className="max-w-screen-lg mx-auto">
         <BackButton showBackArrow />
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-4">
           {/* User Profile Section */}
           <div className="flex items-center gap-4 p-4 border-b border-mono-200">
             {/* Profile Image */}
-            <div className="relative h-24 w-24">
-              <Image
-                src={user.image || "/images/placeholder.png"}
-                alt="Avatar"
-                className="rounded-full object-cover border-4 border-secondary-100"
-                fill
-              />
+            <div className="relative h-24 w-24 min-w-[96px] min-h-[96px]">
+              <Avatar src={user.image} user={user} size="lg" />
             </div>
 
             {/* User Info Section */}
-            <div className="flex flex-col gap-1">
-              <h1 className="text-2xl font-bold">{user.name}</h1>
-              <p className="text-mono-400 text-sm">
-                Joined {format(new Date(user.createdAt), "MMMM yyyy")}
-              </p>
+            <div className="flex flex-row justify-between w-full h-full">
+              <div className="flex flex-col">
+                <h1 className="text-2xl font-bold">{user.name}</h1>
+                <p className="text-mono-400 text-sm">
+                  Joined {format(new Date(user.createdAt), "MMMM yyyy")}
+                </p>
 
-              {/* User Statistics */}
-              <div className="flex gap-4 text-sm">
-                <div>
-                  <span className="font-semibold">{user.points}</span> points
+                {/* User Statistics */}
+                <div className="flex gap-4 text-sm">
+                  <div>
+                    <span className="font-semibold">{user.points}</span> points
+                  </div>
+                  <div>
+                    <span className="font-semibold">{activitiesJoined}</span>{" "}
+                    activities joined
+                  </div>
+                  <div>
+                    <span className="font-semibold">
+                      {user.listings.length}
+                    </span>{" "}
+                    activities created
+                  </div>
                 </div>
-                <div>
-                  <span className="font-semibold">{activitiesJoined}</span>{" "}
-                  activities joined
-                </div>
-                <div>
-                  <span className="font-semibold">{user.listings.length}</span>{" "}
-                  activities created
-                </div>
+              </div>
+              <div className="flex flex-col justify-end">
+                {currentUser?.id === user.id ? (
+                  <Button
+                    label="Edit Profile"
+                    onClick={editModal.onOpen}
+                    outline
+                    small
+                  />
+                ) : (
+                  <Button
+                    label="Message"
+                    onClick={() => router.push(`/messages/${user.id}`)}
+                    outline
+                    small
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -116,9 +146,13 @@ const UserClient: React.FC<UserClientProps> = ({
                   style={{ scrollBehavior: "smooth" }}
                 >
                   {/* Map through listings to create cards */}
-                  {user.listings.map((listing) => (
+                  {filteredListings.map((listing) => (
                     <div key={listing.id} className="flex-none w-80">
-                      <ListingCard data={listing} currentUser={currentUser} />
+                      <ListingCard
+                        data={listing}
+                        currentUser={currentUser}
+                        showStatus={isProfileOwner}
+                      />
                     </div>
                   ))}
                 </div>
