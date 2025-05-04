@@ -51,12 +51,14 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({ icon: Icon, label, label2, se
     flex-col
     items-center
     gap-x-8
-    min-w-[180px]
-    p-3
+    min-w-[110px]
+    md:min-w-[120px]
+    pt-2
+    py-4
     border-b-4
     hover:text-secondary-400
     hover:bg-secondary-100
-    transition
+    transition-all
     cursor-pointer
     rounded-xl
     ${selected ? 'border-b-slate-200' : 'border-transparent'}

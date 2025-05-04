@@ -200,11 +200,12 @@ const ListingClient: React.FC<ListingClientProps> = ({
           />
           <div
             className="
-            grid
-            grid-col-1
+            md:grid
             md:grid-cols-7
             md:gap-10
             mt-6
+            flex
+            flex-col
           "
           >
             <ListingInfo

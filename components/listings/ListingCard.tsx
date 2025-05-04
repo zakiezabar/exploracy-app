@@ -116,7 +116,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
           </div>
         </div>
         <div className="flex flex-col text-sm text-mono-900 ">
-          <div className="font-bold line-clamp-2 capitalize">{title}</div>
+          <div className="font-bold line-clamp-1 capitalize">{title}</div>
           <div className="font-normal truncate flex flex-row items-center text-mono-400">
             <MapPin className="text-mono-400 size-5" />
             {location?.label || "Couldn't find location"}

@@ -58,8 +58,9 @@ const Categories = () => {
           className="
         flex
         flex-row
-        items-center
-        justify-center
+        items-start
+        md:justify-center
+        justify-left
         align-top
         gap-2
         overflow-x-auto
