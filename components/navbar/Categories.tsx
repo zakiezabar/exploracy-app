@@ -65,6 +65,7 @@ const Categories = () => {
         overflow-x-auto
         text-center	
         py-2
+        -mx-5
         "
         >
           {categories.map((item) => (

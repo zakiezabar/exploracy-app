@@ -74,7 +74,7 @@ export const Hero: React.FC = () => {
           </div>
         </div>
       )}
-      <div className="relative bg-[url('/images/hero3.png')] bg-cover bg-center md:h-[300px] flex flex-col justify-between rounded-2xl p-2">
+      <div className="relative bg-[url('/images/newbie.png')] bg-cover bg-center md:h-[300px] flex flex-col justify-between rounded-2xl p-2">
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent rounded-2xl pointer-events-none"></div>
         <div className="relative flex flex-row-reverse items-center justify-between">
           <div className="bg-white rounded-xl p-2 shadow-md hover:shadow-lg shadow-mono-900/20 w-full">
