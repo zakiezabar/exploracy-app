@@ -6,7 +6,7 @@ interface ListingLayoutProps {
 
 const ListingLayout = ({ children }: ListingLayoutProps) => {
   return (
-    <div className="h-full pt-20 md:pt-24">
+    <div className="h-full px-4 pt-20 md:pt-24">
       <div className="mx-auto h-full">
         {children}
       </div>
