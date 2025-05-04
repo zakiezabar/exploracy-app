@@ -37,6 +37,8 @@ const Button: React.FC<ButtonProps> = ({
     hover:opacity-80
     transition
     flex flex-row
+    items-center
+    justify-center
     p-4
     ${outline ? 'bg-white' : 'bg-primary-400'}
     ${outline ? 'border-slate-200' : 'border-primary-500'}

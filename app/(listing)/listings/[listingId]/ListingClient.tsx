@@ -217,7 +217,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
               whatsIncluded={
                 listing.whatsIncluded || "No information available"
               }
-              requirement={listing.requirement || "Np requirement available"}
+              requirement={listing.requirement || "No requirement available"}
               difficulty={listing.difficulty || "Not specified"}
               guestCount={listing.guestCount}
               locationValue={listing.locationValue}

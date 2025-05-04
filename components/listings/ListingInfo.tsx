@@ -8,7 +8,7 @@ import ListingCategory from './ListingCategory';
 import { categories } from '../navbar/Categories';
 import CategoryInput from '../inputs/CategoryInput';
 import dynamic from 'next/dynamic';
-import Heading from '../Heading';
+import SectionTitle from '../SectionTitle';
 import Link from 'next/link';
 
 const Map = dynamic(() => import('../Map'))
@@ -72,38 +72,38 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
         
       </div>
       <div className="flex flex-col">
-        <Heading
+        <SectionTitle
           title="What you will do?"
         />
-        <div className="text-base font-light text-neutral-500">
+        <div className="text-sm text-mono-600">
           {highlight || "No highlight available."} {/* Provide a default message */}
         </div>
       </div>
       <hr />
       <div className="flex flex-col">
-        <Heading
+        <SectionTitle
           title="What is included in this activity?"
         />
-        <div className="text-base font-light text-neutral-500">
+        <div className="text-sm text-mono-600">
           {whatsIncluded || "No information available."} {/* Provide a default message */}
         </div>
       </div>
       <hr />
       <div className="flex flex-col">
-        <Heading
+        <SectionTitle
           title="Guests requirements"
         />
-        <div className="text-base font-light text-neutral-500">
+        <div className="text-sm text-mono-600">
           {requirement || "No requirements specified."} {/* Provide a default message */}
         </div>
       </div>
       <hr />
       <div className="flex flex-col">
-        <Heading
+        <SectionTitle
           title="Location"
         />
         {/* <Map center={coordinates} /> */}
-        <div className="text-base font-light text-neutral-500">
+        <div className="text-sm text-mono-600">
           {locationDetails || "No location details provided."} {/* Provide a default message */}
         </div>
       </div>
